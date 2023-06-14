@@ -1,4 +1,6 @@
-﻿namespace Model.Entities.MonolithArena.InGame;
+﻿using Model.Entities.MonolithArena.InGame.Logs;
+
+namespace Model.Entities.MonolithArena.InGame;
 
 [Table("GAMES")]
 public class Game
@@ -8,4 +10,10 @@ public class Game
     
     [NotMapped]
     public List<Position> Positions { get; set; }
+    
+    [NotMapped]
+    public List<UserGame> Users { get; set; }
+    
+    [NotMapped]
+    public List<GameLog> Logs { get; set; }
 }

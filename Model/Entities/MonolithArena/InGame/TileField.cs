@@ -3,12 +3,9 @@ using Direction = Model.Entities.MonolithArena.GameContent.Direction;
 
 namespace Model.Entities.MonolithArena.InGame;
 
-[Table("CHAMPION_OCCUPIES_FIELD_JT")]
-public class ChampionField
+[Table("TILE_OCCUPIES_FIELD_JT")]
+public class TileField
 {
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
-    
     [Column("FIELD_ID")]
     public int FieldId { get; set; }
     public Field Field { get; set; }

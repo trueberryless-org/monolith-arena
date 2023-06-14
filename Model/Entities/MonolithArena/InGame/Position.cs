@@ -1,4 +1,6 @@
-﻿namespace Model.Entities.MonolithArena.InGame;
+﻿using Model.Entities.MonolithArena.InGame.Logs;
+
+namespace Model.Entities.MonolithArena.InGame;
 
 [Table("POSITIONS")]
 public class Position
@@ -13,5 +15,8 @@ public class Position
     public int Order { get; set; }
     
     [NotMapped] 
-    public List<ChampionField> Fields { get; set; }
+    public List<TileField> Fields { get; set; }
+    
+    [NotMapped]
+    public List<GameLog> Logs { get; set; }
 }

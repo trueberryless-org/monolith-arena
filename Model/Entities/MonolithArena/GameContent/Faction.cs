@@ -1,4 +1,6 @@
-﻿namespace Model.Entities.MonolithArena.GameContent;
+﻿using Model.Entities.MonolithArena.Enums;
+
+namespace Model.Entities.MonolithArena.GameContent;
 
 [Table("FACTIONS")]
 public class Faction
@@ -11,4 +13,6 @@ public class Faction
     
     [NotMapped]
     public List<Tile> Tiles { get; set; }
+    
+    public FactionColor Color { get; set; }
 }

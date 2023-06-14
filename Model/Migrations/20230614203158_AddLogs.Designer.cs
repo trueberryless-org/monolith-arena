@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.Configuration;
 
@@ -10,9 +11,11 @@ using Model.Configuration;
 namespace Model.Migrations
 {
     [DbContext(typeof(ModelDbContext))]
-    partial class ModelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230614203158_AddLogs")]
+    partial class AddLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -391,7 +394,7 @@ namespace Model.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("GAME_LOGS_BT");
+                    b.ToTable("GAME_LOGS");
 
                     b.UseTptMappingStrategy();
                 });
@@ -506,13 +509,6 @@ namespace Model.Migrations
                     b.ToTable("RUNES");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.BattleStart", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.GameLog");
-
-                    b.ToTable("BATTLE_STARTS");
-                });
-
             modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLog", b =>
                 {
                     b.HasBaseType("Model.Entities.MonolithArena.InGame.GameLog");
@@ -523,7 +519,7 @@ namespace Model.Migrations
 
                     b.HasIndex("TileId");
 
-                    b.ToTable("TILE_LOGS_BT");
+                    b.ToTable("TILE_LOGS");
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Command", b =>
@@ -562,20 +558,6 @@ namespace Model.Migrations
                     b.ToTable("ORDER_LOGIC_GATES");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileDiscard", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLog");
-
-                    b.ToTable("TILE_DISCARDS");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileDraw", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLog");
-
-                    b.ToTable("TILE_DRAWS");
-                });
-
             modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLog", b =>
                 {
                     b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLog");
@@ -586,35 +568,7 @@ namespace Model.Migrations
 
                     b.HasIndex("FieldId");
 
-                    b.ToTable("TILE_FIELD_LOGS_BT");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileManaCharge", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLog");
-
-                    b.ToTable("TILE_MANA_CHARGES");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileNet", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLog");
-
-                    b.ToTable("TILE_NETS");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TilePreciseShot", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLog");
-
-                    b.ToTable("TILE_PRECISE_SHOTS");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileStorage", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLog");
-
-                    b.ToTable("TILE_STORAGES");
+                    b.ToTable("TILE_FIELD_LOGS");
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog", b =>
@@ -627,42 +581,7 @@ namespace Model.Migrations
 
                     b.HasIndex("DirectionId");
 
-                    b.ToTable("TILE_FIELD_DIRECTION_LOGS_BT");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TilePush", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLog");
-
-                    b.ToTable("TILE_PUSHES");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TileCharge", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog");
-
-                    b.ToTable("TILE_CHARGES");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TileFalseOrder", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog");
-
-                    b.ToTable("TILE_FALSE_ORDERS");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TileMovement", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog");
-
-                    b.ToTable("TILE_MOVEMENTS");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TilePlacement", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog");
-
-                    b.ToTable("TILE_PLACEMENTS");
+                    b.ToTable("TILE_FIELD_DIRECTION_LOGS");
                 });
 
             modelBuilder.Entity("Model.Entities.Authentication.RoleClaim", b =>
@@ -936,15 +855,6 @@ namespace Model.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.BattleStart", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.GameLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.BattleStart", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLog", b =>
                 {
                     b.HasOne("Model.Entities.MonolithArena.InGame.GameLog", null)
@@ -996,24 +906,6 @@ namespace Model.Migrations
                     b.Navigation("OptionTwoOrder");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileDiscard", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileDiscard", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileDraw", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileDraw", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLog", b =>
                 {
                     b.HasOne("Model.Entities.MonolithArena.GameContent.Field", "Field")
@@ -1031,42 +923,6 @@ namespace Model.Migrations
                     b.Navigation("Field");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileManaCharge", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileManaCharge", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileNet", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileNet", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TilePreciseShot", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TilePreciseShot", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileStorage", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileStorage", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog", b =>
                 {
                     b.HasOne("Model.Entities.MonolithArena.GameContent.Direction", "Direction")
@@ -1082,51 +938,6 @@ namespace Model.Migrations
                         .IsRequired();
 
                     b.Navigation("Direction");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TilePush", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TilePush", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TileCharge", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TileCharge", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TileFalseOrder", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TileFalseOrder", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TileMovement", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TileMovement", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TilePlacement", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLog", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.InGame.Logs.TileLogs.TileFieldLogs.TileFieldDirectionLogs.TilePlacement", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.Entities.Authentication.Role", b =>

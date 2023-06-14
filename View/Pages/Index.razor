@@ -1,15 +1,83 @@
 ﻿@page "/"
 
+<MudContainer>
+
+    <MudText Typo="Typo.h5" Class="my-5">Recent Games</MudText>
+    <MudContainer Class="pl-0 pr-0 d-flex align-self-center" Style="margin-bottom: 5vh">
+        @for (var i = 0; i < 5; i++)
+        {
+            <MudPaper Href="" Class="paper-link" Elevation="5">
+                <div>
+                    <MudText Typo="Typo.subtitle1">Name</MudText>
+                    <MudText Typo="Typo.subtitle1">Faction</MudText>
+                    <MudText Typo="Typo.subtitle1">vs</MudText>
+                    <MudText Typo="Typo.subtitle1">Name</MudText>
+                    <MudText Typo="Typo.subtitle1">Faction</MudText>
+                </div>
+            </MudPaper>
+        }
+    </MudContainer>
+
+    <MudText Typo="Typo.h5" Class="my-5">Actions</MudText>
+    <MudContainer Class="pl-0 pr-0 d-flex align-self-center" Style="margin-bottom: 5vh">
+        <MudPaper Href="" Class="paper-link" Elevation="5">
+            <div>
+                <MudIcon Icon="@Icons.Material.Rounded.Add" Size="Size.Large"/>
+                <MudText Typo="Typo.subtitle1">Start new game</MudText>
+            </div>
+        </MudPaper>
+        <MudPaper Href="" Class="paper-link" Elevation="5">
+            <div>
+                <MudIcon Icon="@Icons.Material.Rounded.People" Size="Size.Large"/>
+                <MudText Typo="Typo.subtitle1">Users</MudText>
+            </div>
+        </MudPaper>
+        <MudPaper Href="" Class="paper-link" Elevation="5">
+            <div>
+                <MudIcon Icon="@Icons.Material.Rounded.VideogameAsset" Size="Size.Large"/>
+                <MudText Typo="Typo.subtitle1">Games</MudText>
+            </div>
+        </MudPaper>
+        <MudPaper Href="" Class="paper-link" Elevation="5">
+            <div>
+                <MudIcon Icon="@Icons.Material.Rounded.Search" Size="Size.Large"/>
+                <MudText Typo="Typo.subtitle1">
+                    Search <br/>
+                    (Users and Games)
+                </MudText>
+            </div>
+        </MudPaper>
+    </MudContainer>
+</MudContainer>
+
 @code {
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (!firstRender) return;
-        
-        if (await UserService.IsAuthenticated())
-            NavigationManager.NavigateTo(NavigationProvider["Home"].Link);
-        else
+
+        if (!await UserService.IsAuthenticated())
             NavigationManager.NavigateTo(NavigationProvider["Login"].Link);
     }
 
 }
+
+<style>
+    .paper-link {
+        transition: transform .3s ease-in-out;
+        width: 200px;
+        min-height: 200px;
+        border-radius: 20px;
+        margin: 10px;
+        
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .paper-link:hover {
+        transform: translateY(-10px);
+        cursor: pointer;
+    }
+</style>

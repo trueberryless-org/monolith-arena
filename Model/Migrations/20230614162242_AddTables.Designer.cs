@@ -11,8 +11,8 @@ using Model.Configuration;
 namespace Model.Migrations
 {
     [DbContext(typeof(ModelDbContext))]
-    [Migration("20230613203100_AddStaticTilesTables")]
-    partial class AddStaticTilesTables
+    [Migration("20230614162242_AddTables")]
+    partial class AddTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,7 +138,7 @@ namespace Model.Migrations
                     b.ToTable("LOG_ENTRIES");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Attack", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Attack", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -153,7 +153,7 @@ namespace Model.Migrations
                     b.ToTable("ATTACKS");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.ChampionAttack", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionAttack", b =>
                 {
                     b.Property<int>("ChampionId")
                         .HasColumnType("int")
@@ -179,7 +179,7 @@ namespace Model.Migrations
                     b.ToTable("CHAMPION_HAS_ATTACKS_JT");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.ChampionFeature", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionFeature", b =>
                 {
                     b.Property<int>("ChampionId")
                         .HasColumnType("int")
@@ -189,6 +189,10 @@ namespace Model.Migrations
                         .HasColumnType("int")
                         .HasColumnName("FEATURE_ID");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int")
+                        .HasColumnName("QUANTITY");
+
                     b.HasKey("ChampionId", "FeatureId");
 
                     b.HasIndex("FeatureId");
@@ -196,7 +200,7 @@ namespace Model.Migrations
                     b.ToTable("CHAMPION_HAS_FEATURES_JT");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.ChampionInitiative", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionInitiative", b =>
                 {
                     b.Property<int>("ChampionId")
                         .HasColumnType("int")
@@ -213,7 +217,7 @@ namespace Model.Migrations
                     b.ToTable("CHAMPION_HAS_INITIATIVES_JT");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Direction", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Direction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,7 +232,7 @@ namespace Model.Migrations
                     b.ToTable("DIRECTIONS");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Faction", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Faction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -244,7 +248,7 @@ namespace Model.Migrations
                     b.ToTable("FACTIONS");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Feature", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Feature", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,7 +263,27 @@ namespace Model.Migrations
                     b.ToTable("FEATURES");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Initiative", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Field", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("X")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Y")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Z")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FIELDS");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Initiative", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -273,7 +297,7 @@ namespace Model.Migrations
                     b.ToTable("INITIATIVES");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.RuneDirection", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.RuneDirection", b =>
                 {
                     b.Property<int>("RuneId")
                         .HasColumnType("int")
@@ -290,7 +314,7 @@ namespace Model.Migrations
                     b.ToTable("RUNE_HAS_DIRECTIONS_JT");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.RuneFeature", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.RuneFeature", b =>
                 {
                     b.Property<int>("RuneId")
                         .HasColumnType("int")
@@ -307,7 +331,7 @@ namespace Model.Migrations
                     b.ToTable("RUNE_HAS_FEATURES_JT");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Tile", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Tile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -326,27 +350,119 @@ namespace Model.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Champion", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Game", b =>
                 {
-                    b.HasBaseType("Model.Entities.MonolithArena.Tile");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GAMES");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int")
+                        .HasColumnName("GAME_ID");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("POSITIONS");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.TileField", b =>
+                {
+                    b.Property<int>("FieldId")
+                        .HasColumnType("int")
+                        .HasColumnName("FIELD_ID");
+
+                    b.Property<int>("TileId")
+                        .HasColumnType("int")
+                        .HasColumnName("TILE_ID");
+
+                    b.Property<int>("PositionId")
+                        .HasColumnType("int")
+                        .HasColumnName("POSITION_ID");
+
+                    b.Property<int>("DirectionId")
+                        .HasColumnType("int")
+                        .HasColumnName("FACING");
+
+                    b.HasKey("FieldId", "TileId", "PositionId");
+
+                    b.HasIndex("DirectionId");
+
+                    b.HasIndex("PositionId");
+
+                    b.HasIndex("TileId");
+
+                    b.ToTable("TILE_OCCUPIES_FIELD_JT");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.UserGame", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnName("USER_ID");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int")
+                        .HasColumnName("GAME_ID");
+
+                    b.Property<int>("FactionId")
+                        .HasColumnType("int")
+                        .HasColumnName("FACTION_ID");
+
+                    b.HasKey("UserId", "GameId");
+
+                    b.HasIndex("FactionId");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("USER_PLAYS_GAMES_JT");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Champion", b =>
+                {
+                    b.HasBaseType("Model.Entities.MonolithArena.GameContent.Tile");
 
                     b.Property<string>("ChampionType")
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("NAME");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int")
+                        .HasColumnName("QUANTITY");
+
                     b.ToTable("CHAMPIONS");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Order", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Order", b =>
                 {
-                    b.HasBaseType("Model.Entities.MonolithArena.Tile");
+                    b.HasBaseType("Model.Entities.MonolithArena.GameContent.Tile");
 
                     b.ToTable("ORDERS_BT");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Rune", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Rune", b =>
                 {
-                    b.HasBaseType("Model.Entities.MonolithArena.Tile");
+                    b.HasBaseType("Model.Entities.MonolithArena.GameContent.Tile");
 
                     b.Property<string>("RuneType")
                         .IsRequired()
@@ -355,9 +471,9 @@ namespace Model.Migrations
                     b.ToTable("RUNES");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Command", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Command", b =>
                 {
-                    b.HasBaseType("Model.Entities.MonolithArena.Order");
+                    b.HasBaseType("Model.Entities.MonolithArena.GameContent.Order");
 
                     b.Property<string>("OrderType")
                         .IsRequired()
@@ -366,12 +482,13 @@ namespace Model.Migrations
                     b.ToTable("ORDER_COMMANDS");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.LogicGate", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.LogicGate", b =>
                 {
-                    b.HasBaseType("Model.Entities.MonolithArena.Order");
+                    b.HasBaseType("Model.Entities.MonolithArena.GameContent.Order");
 
-                    b.Property<int>("LogicGateType")
-                        .HasColumnType("int");
+                    b.Property<string>("LogicGateType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("OptionOneOrderId")
                         .HasColumnType("int")
@@ -420,21 +537,21 @@ namespace Model.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.ChampionAttack", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionAttack", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Attack", "Attack")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Attack", "Attack")
                         .WithMany()
                         .HasForeignKey("AttackId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.Champion", "Champion")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Champion", "Champion")
                         .WithMany("Attacks")
                         .HasForeignKey("ChampionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.Direction", "Direction")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Direction", "Direction")
                         .WithMany()
                         .HasForeignKey("DirectionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -447,15 +564,15 @@ namespace Model.Migrations
                     b.Navigation("Direction");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.ChampionFeature", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionFeature", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Champion", "Champion")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Champion", "Champion")
                         .WithMany("Features")
                         .HasForeignKey("ChampionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.Feature", "Feature")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Feature", "Feature")
                         .WithMany()
                         .HasForeignKey("FeatureId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -466,15 +583,15 @@ namespace Model.Migrations
                     b.Navigation("Feature");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.ChampionInitiative", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionInitiative", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Champion", "Champion")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Champion", "Champion")
                         .WithMany("Initiatives")
                         .HasForeignKey("ChampionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.Initiative", "Initiative")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Initiative", "Initiative")
                         .WithMany()
                         .HasForeignKey("InitiativeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -485,15 +602,15 @@ namespace Model.Migrations
                     b.Navigation("Initiative");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.RuneDirection", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.RuneDirection", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Direction", "Direction")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Direction", "Direction")
                         .WithMany()
                         .HasForeignKey("DirectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.Rune", "Rune")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Rune", "Rune")
                         .WithMany("Directions")
                         .HasForeignKey("RuneId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -504,15 +621,15 @@ namespace Model.Migrations
                     b.Navigation("Rune");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.RuneFeature", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.RuneFeature", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Feature", "Feature")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Feature", "Feature")
                         .WithMany()
                         .HasForeignKey("FeatureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.Rune", "Rune")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Rune", "Rune")
                         .WithMany("Features")
                         .HasForeignKey("RuneId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -523,9 +640,9 @@ namespace Model.Migrations
                     b.Navigation("Rune");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Tile", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Tile", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Faction", "Faction")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Faction", "Faction")
                         .WithMany("Tiles")
                         .HasForeignKey("FactionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -534,59 +651,132 @@ namespace Model.Migrations
                     b.Navigation("Faction");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Champion", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Position", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Tile", null)
+                    b.HasOne("Model.Entities.MonolithArena.InGame.Game", "Game")
+                        .WithMany("Positions")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.TileField", b =>
+                {
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Direction", "Direction")
+                        .WithMany()
+                        .HasForeignKey("DirectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Field", "Field")
+                        .WithMany()
+                        .HasForeignKey("FieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Model.Entities.MonolithArena.InGame.Position", "Position")
+                        .WithMany("Fields")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Tile", "Tile")
+                        .WithMany()
+                        .HasForeignKey("TileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Direction");
+
+                    b.Navigation("Field");
+
+                    b.Navigation("Position");
+
+                    b.Navigation("Tile");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.UserGame", b =>
+                {
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Faction", "Faction")
+                        .WithMany()
+                        .HasForeignKey("FactionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Model.Entities.MonolithArena.InGame.Game", "Game")
+                        .WithMany("Users")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Model.Entities.Authentication.User", "User")
+                        .WithMany("Games")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Faction");
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Champion", b =>
+                {
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Tile", null)
                         .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.Champion", "Id")
+                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.Champion", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Order", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Order", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Tile", null)
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Tile", null)
                         .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.Order", "Id")
+                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.Order", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Rune", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Rune", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Tile", null)
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Tile", null)
                         .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.Rune", "Id")
+                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.Rune", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Command", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Command", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Order", null)
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Order", null)
                         .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.Command", "Id")
+                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.Command", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.LogicGate", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.LogicGate", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.Order", null)
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Order", null)
                         .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.LogicGate", "Id")
+                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.LogicGate", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.Order", "OptionOneOrder")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Order", "OptionOneOrder")
                         .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.LogicGate", "OptionOneOrderId")
+                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.LogicGate", "OptionOneOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.Order", "OptionTwoOrder")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Order", "OptionTwoOrder")
                         .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.LogicGate", "OptionTwoOrderId")
+                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.LogicGate", "OptionTwoOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -602,15 +792,29 @@ namespace Model.Migrations
 
             modelBuilder.Entity("Model.Entities.Authentication.User", b =>
                 {
+                    b.Navigation("Games");
+
                     b.Navigation("RoleClaims");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Faction", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Faction", b =>
                 {
                     b.Navigation("Tiles");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Champion", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Game", b =>
+                {
+                    b.Navigation("Positions");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.InGame.Position", b =>
+                {
+                    b.Navigation("Fields");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Champion", b =>
                 {
                     b.Navigation("Attacks");
 
@@ -619,7 +823,7 @@ namespace Model.Migrations
                     b.Navigation("Initiatives");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.Rune", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Rune", b =>
                 {
                     b.Navigation("Directions");
 

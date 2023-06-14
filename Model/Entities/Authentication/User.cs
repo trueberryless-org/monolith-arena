@@ -1,4 +1,6 @@
-﻿namespace Model.Entities.Authentication;
+﻿using Model.Entities.MonolithArena.InGame;
+
+namespace Model.Entities.Authentication;
 
 [Table("USERS")]
 public class User {
@@ -26,6 +28,9 @@ public class User {
     public string LoginPassword { get; set; } = null!;
     
     public List<RoleClaim> RoleClaims { get; set; }
+    
+    [NotMapped]
+    public List<UserGame> Games { get; set; }
 
     [NotMapped] 
     public IEnumerable<string> PlainRoles => RoleClaims.Select(x => x.Role.Identifier);

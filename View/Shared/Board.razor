@@ -1,0 +1,107 @@
+﻿<div class="main">
+    <MudDropContainer T="DropItem" Items="_items" ApplyDropClassesOnDragStarted="false" ItemsSelector="@((item,dropzone) => item.Place == dropzone)" CanDropClass="mud-border-success" NoDropClass="mud-border-error" ItemDropped="ItemUpdated" Class="board">
+	    <ChildContent>
+		    <div class="">
+			    <i></i>
+			    @for (int i = 0; i < 19; i++)
+			    {
+				    <MudDropZone T="DropItem" Identifier="Fridge" CanDrop="@((item) => false)" Class="field"/>
+			    }
+		    </div>
+        </ChildContent>
+	    <ItemRenderer>
+	    </ItemRenderer>
+    </MudDropContainer>
+</div>
+
+
+@code {
+    private void Reset()
+	{
+		foreach (var item in _items)
+		{
+			item.Place = "Fridge";
+			item.IsPicked = false;
+		}
+	}
+
+	private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
+	{
+		dropItem.Item.IsPicked = true;
+		dropItem.Item.Place = dropItem.DropzoneIdentifier;
+	}
+
+	private List<DropItem> _items = new()
+		{
+			new DropItem() { Icon = @Icons.Custom.Uncategorized.FoodApple, Color = Color.Error, IsRotten = false, Place = "Fridge" },
+		    new DropItem() { Icon = @Icons.Custom.Uncategorized.Baguette, Color = Color.Warning, IsRotten = false, Place = "Fridge" },
+		    new DropItem() { Icon = @Icons.Custom.Uncategorized.Sausage, Color = Color.Secondary, IsRotten = true, Place = "Fridge" },
+		    new DropItem() { Icon = @Icons.Custom.Uncategorized.WaterMelon, Color = Color.Success, IsRotten = false, Place = "Fridge" },
+		    new DropItem() { Icon = @Icons.Custom.Uncategorized.Fish, Color = Color.Info, IsRotten = true, Place = "Fridge" },
+		};
+
+	public class DropItem
+	{
+		public string Icon { get; init; }
+	    public Color Color { get; init; }
+	    public bool IsRotten { get; set; }
+		public bool IsPicked { get; set; }
+		public string Place { get; set; }
+	}
+}
+
+
+<style>
+    .main {
+        display:flex;
+        --s: 100px;  /* size  */
+        --m: 4px;    /* margin */
+		
+		/* for the float*/
+		--f: calc(2*var(--s)*1.1547 + 4*var(--m) - 2*28.8675px - 2px);
+		
+		/* trapezoid */
+		--nr:7;
+		--lw:calc(var(--nr)*(var(--s) + 2*var(--m)));
+    }
+    
+    .board {
+		font-size: 0; /*disable white space between inline block element */
+		max-width:var(--lw);
+		margin:0 auto;
+    }
+    
+    .field {
+        width: var(--s);
+        margin: var(--m);
+        height: calc(var(--s)*1.1547); 
+        display: inline-block;
+        font-size:initial;
+        clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+        background: red;
+        margin-bottom: calc(var(--m) - var(--s)*0.2885); 
+    }
+    
+    .board::before {
+        content: "";
+        width: calc(var(--s)/2 + var(--m));
+        float: left;
+        height: 120%;
+        shape-outside: repeating-linear-gradient(     
+                       #0000 0 calc(var(--f) - 3px),      
+                       #000  0 var(--f));
+    }
+    
+    .board i::before ,
+    .board i::after{
+		content: "";
+		width: clamp(0px, (100% - var(--lw) + 1px)*1000,calc(50% - var(--m) - var(--s)/2));
+		float: left;
+		height: calc(var(--f)*(var(--nr) - 1)/2);
+		shape-outside: linear-gradient(to bottom right,#000 50.5%,#0000 0);
+    }
+    .board i::after {
+		float:right;
+		shape-outside: linear-gradient(to bottom left,#000 49%,#0000 0);
+    }
+</style>

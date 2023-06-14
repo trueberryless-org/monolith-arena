@@ -10,4 +10,7 @@ public class ChampionFeature
     [Column("FEATURE_ID")]
     public int FeatureId { get; set; }
     public Feature Feature { get; set; }
+    
+    [Column("QUANTITY")]
+    public int Quantity { get; set; }
 }

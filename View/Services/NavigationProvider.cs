@@ -21,21 +21,21 @@ public class NavigationProvider
                 "Profile",
                 new Page()
                 {
-                    Name = "Profile", Link = "/profile", Type = PageType.USER, Icon = Icons.Material.Filled.Person
+                    Name = "Profile", Link = "/profile", Type = PageType.USER, Icon = Icons.Material.Rounded.Person
                 }
             },
             {
                 "Settings",
                 new Page()
                 {
-                    Name = "Settings", Link = "/settings", Type = PageType.USER, Icon = Icons.Material.Filled.Settings
+                    Name = "Settings", Link = "/settings", Type = PageType.USER, Icon = Icons.Material.Rounded.Settings
                 }
             },
             {
                 "Login",
                 new Page()
                 {
-                    Name = "Login", Link = "/login", Type = PageType.AUTHENTICATION, Icon = Icons.Material.Filled.Login
+                    Name = "Login", Link = "/login", Type = PageType.AUTHENTICATION, Icon = Icons.Material.Rounded.Login
                 }
             },
             {
@@ -43,7 +43,7 @@ public class NavigationProvider
                 new Page()
                 {
                     Name = "Register", Link = "/register", Type = PageType.AUTHENTICATION,
-                    Icon = Icons.Material.Filled.PersonAdd
+                    Icon = Icons.Material.Rounded.PersonAdd
                 }
             },
             {
@@ -51,7 +51,7 @@ public class NavigationProvider
                 new Page()
                 {
                     Name = "Imprint", Link = "/imprint", Type = PageType.FOOTER,
-                    Icon = Icons.Material.Filled.Assignment
+                    Icon = Icons.Material.Rounded.Assignment
                 }
             },
             {
@@ -59,7 +59,7 @@ public class NavigationProvider
                 new Page()
                 {
                     Name = "Source", Link = "/source", Type = PageType.FOOTER,
-                    Icon = Icons.Material.Filled.Source
+                    Icon = Icons.Material.Rounded.Source
                 }
             },
 
@@ -71,18 +71,19 @@ public class NavigationProvider
                     Name = "Home",
                     Link = "/",
                     Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Home,
+                    Icon = Icons.Material.Rounded.Home,
                     Priority = PagePriority.IMPORTANT
                 }
             },
             {
-                "Verified",
+                "New Game",
                 new Page()
                 {
-                    Name = "Verified",
-                    Link = "/Verified",
+                    Name = "New Game",
+                    Link = "/newgame",
                     Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Verified
+                    Icon = Icons.Material.Rounded.Add,
+                    Priority = PagePriority.IMPORTANT
                 }
             },
             {
@@ -90,151 +91,32 @@ public class NavigationProvider
                 new Page()
                 {
                     Name = "Games",
-                    Link = "/Games",
+                    Link = "/games",
                     Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Games,
-                    Priority = PagePriority.IMPORTANT
+                    Icon = Icons.Material.Rounded.VideogameAsset,
+                    Priority = PagePriority.TRIVIAL
                 }
             },
             {
-                "Tag",
+                "Users",
                 new Page()
                 {
-                    Name = "Tag",
-                    Link = "/Tag",
+                    Name = "Users",
+                    Link = "/users",
                     Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Tag,
-                    Priority = PagePriority.IMPORTANT
+                    Icon = Icons.Material.Rounded.People,
+                    Priority = PagePriority.TRIVIAL
                 }
             },
             {
-                "Vignette",
+                "Search",
                 new Page()
                 {
-                    Name = "Vignette",
-                    Link = "/Vignette",
+                    Name = "Search",
+                    Link = "/search",
                     Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Vignette
-                }
-            },
-            {
-                "Receipt",
-                new Page()
-                {
-                    Name = "Receipt",
-                    Link = "/Receipt",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Receipt
-                }
-            },
-            {
-                "Mail",
-                new Page()
-                {
-                    Name = "Mail",
-                    Link = "/Mail",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Mail
-                }
-            },
-            {
-                "Backspace",
-                new Page()
-                {
-                    Name = "Backspace",
-                    Link = "/Backspace",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Backspace
-                }
-            },
-            {
-                "Edit",
-                new Page()
-                {
-                    Name = "Edit",
-                    Link = "/Edit",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Edit
-                }
-            },
-            {
-                "Factory",
-                new Page()
-                {
-                    Name = "Factory",
-                    Link = "/Factory",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Factory
-                }
-            },
-            {
-                "Mediation",
-                new Page()
-                {
-                    Name = "Mediation",
-                    Link = "/Mediation",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Mediation
-                }
-            },
-            {
-                "Nature",
-                new Page()
-                {
-                    Name = "Nature",
-                    Link = "/Nature",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Nature
-                }
-            },
-            {
-                "Landscape",
-                new Page()
-                {
-                    Name = "Landscape",
-                    Link = "/Landscape",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Landscape
-                }
-            },
-            {
-                "Tab",
-                new Page()
-                {
-                    Name = "Tab",
-                    Link = "/Tab",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Tab
-                }
-            },
-            {
-                "Panorama",
-                new Page()
-                {
-                    Name = "Panorama",
-                    Link = "/Panorama",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Panorama
-                }
-            },
-            {
-                "Elevator",
-                new Page()
-                {
-                    Name = "Elevator",
-                    Link = "/Elevator",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Elevator
-                }
-            },
-            {
-                "Water",
-                new Page()
-                {
-                    Name = "Water",
-                    Link = "/Water",
-                    Type = PageType.CONTENT,
-                    Icon = Icons.Material.Filled.Water
+                    Icon = Icons.Material.Rounded.Search,
+                    Priority = PagePriority.TRIVIAL
                 }
             },
         };
@@ -268,7 +150,7 @@ public class NavigationProvider
                             Name = "Docs",
                             Link = GetNewUrl(url, "docs", GetFirstPath(url)),
                             Type = PageType.RELATED,
-                            Icon = Icons.Material.Filled.Code
+                            Icon = Icons.Material.Rounded.Code
                         }
                     );
                 }
@@ -296,7 +178,7 @@ public class NavigationProvider
                             Name = "API",
                             Link = GetNewUrl(url, "api", GetFirstPath(url)),
                             Type = PageType.RELATED,
-                            Icon = Icons.Material.Filled.Api
+                            Icon = Icons.Material.Rounded.Api
                         }
                     );
                 }
@@ -309,7 +191,7 @@ public class NavigationProvider
                         Name = "API",
                         Link = GetNewUrl(url, "api", GetSubdomain(url)),
                         Type = PageType.RELATED,
-                        Icon = Icons.Material.Filled.Api
+                        Icon = Icons.Material.Rounded.Api
                     }
                 );
                 _pages.Add(
@@ -319,7 +201,7 @@ public class NavigationProvider
                         Name = "Docs",
                         Link = GetNewUrl(url, "docs", GetSubdomain(url)),
                         Type = PageType.RELATED,
-                        Icon = Icons.Material.Filled.Code
+                        Icon = Icons.Material.Rounded.Code
                     }
                 );
                 break;
@@ -459,7 +341,7 @@ public struct Page
         Link = null;
         Type = PageType.CONTENT;
         Priority = PagePriority.TRIVIAL;
-        Icon = Icons.Material.Filled.Icecream;
+        Icon = Icons.Material.Rounded.Icecream;
         Color = Color.Inherit;
     }
 }
