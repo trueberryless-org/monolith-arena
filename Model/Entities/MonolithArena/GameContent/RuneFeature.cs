@@ -1,4 +1,4 @@
-﻿namespace Model.Entities.MonolithArena;
+﻿namespace Model.Entities.MonolithArena.GameContent;
 
 [Table("RUNE_HAS_FEATURES_JT")]
 public class RuneFeature

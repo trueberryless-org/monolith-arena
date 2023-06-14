@@ -1,4 +1,4 @@
-﻿namespace Model.Entities.MonolithArena;
+﻿namespace Model.Entities.MonolithArena.GameContent;
 
 [Table("RUNE_HAS_DIRECTIONS_JT")]
 public class RuneDirection

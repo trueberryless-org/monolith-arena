@@ -1,4 +1,4 @@
-﻿namespace Model.Entities.MonolithArena;
+﻿namespace Model.Entities.MonolithArena.GameContent;
 
 [Table("TILES_BT")]
 public class Tile

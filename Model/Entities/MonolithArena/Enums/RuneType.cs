@@ -1,4 +1,4 @@
-﻿namespace Model.Entities.MonolithArena;
+﻿namespace Model.Entities.MonolithArena.Enums;
 
 public enum RuneType
 {
@@ -12,5 +12,7 @@ public enum RuneType
     DISARMAMENT,
     DOUBLE_ATTACK,
     TELEPORTATION,
-    PENETRATION
+    PENETRATION,
+    EXHAUSTION,
+    MESMERIZATION
 }

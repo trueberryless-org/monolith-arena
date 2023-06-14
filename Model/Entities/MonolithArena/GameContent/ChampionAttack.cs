@@ -1,4 +1,4 @@
-﻿namespace Model.Entities.MonolithArena;
+﻿namespace Model.Entities.MonolithArena.GameContent;
 
 [Table("CHAMPION_HAS_ATTACKS_JT")]
 public class ChampionAttack

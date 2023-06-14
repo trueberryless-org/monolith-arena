@@ -2,7 +2,9 @@
 using Model.Entities.Authentication;
 using Model.Entities.Log;
 using Model.Entities.MonolithArena;
-using Direction = Model.Entities.MonolithArena.Direction;
+using Model.Entities.MonolithArena.GameContent;
+using Direction = Model.Entities.MonolithArena.GameContent.Direction;
+using Position = Model.Entities.MonolithArena.InGame.Position;
 
 namespace Model.Configuration;
 
@@ -75,14 +77,6 @@ public class ModelDbContext : DbContext
             .WithMany()
             .HasForeignKey(e => e.FeatureId);
         
-        modelBuilder.Entity<Direction>()
-            .Property(e => e.DirectionType)
-            .HasConversion<string>();
-        
-        modelBuilder.Entity<Feature>()
-            .Property(e => e.FeatureType)
-            .HasConversion<string>();
-        
         modelBuilder.Entity<ChampionInitiative>()
             .HasKey(e => new { e.ChampionId, e.InitiativeId });
 
@@ -95,6 +89,19 @@ public class ModelDbContext : DbContext
             .HasOne(e => e.Initiative)
             .WithMany()
             .HasForeignKey(e => e.InitiativeId);
+        
+        modelBuilder.Entity<Direction>()
+            .Property(e => e.DirectionType)
+            .HasConversion<string>();
+        
+        modelBuilder.Entity<Feature>()
+            .Property(e => e.FeatureType)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Position>()
+            .HasOne(e => e.Game)
+            .WithMany(e => e.Positions)
+            .HasForeignKey(e => e.GameId);
 
         modelBuilder.Entity<LogicGate>()
             .HasOne(e => e.OptionOneOrder)

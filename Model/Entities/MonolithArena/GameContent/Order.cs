@@ -1,6 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Model.Entities.MonolithArena.Enums;
 
-namespace Model.Entities.MonolithArena;
+namespace Model.Entities.MonolithArena.GameContent;
 
 [Table("ORDERS_BT")]
 public class Order : Tile

@@ -1,4 +1,6 @@
-﻿namespace Model.Entities.MonolithArena;
+﻿using Model.Entities.MonolithArena.Enums;
+
+namespace Model.Entities.MonolithArena.GameContent;
 
 [Table("FEATURES")]
 public class Feature
