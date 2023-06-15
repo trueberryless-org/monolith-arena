@@ -11,7 +11,6 @@ public class Faction
     [Column("NAME")]
     public string Name { get; set; }
     
-    [NotMapped]
     public List<Tile> Tiles { get; set; }
     
     public FactionColor Color { get; set; }

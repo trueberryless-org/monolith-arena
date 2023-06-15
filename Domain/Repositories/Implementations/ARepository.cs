@@ -16,6 +16,10 @@ public abstract class ARepository<TEntity> : IRepository<TEntity> where TEntity 
     public async Task<TEntity?> ReadAsync(int id, CancellationToken ct = default) {
         return await Table.FindAsync(new object?[] { id }, ct);
     }
+    
+    public async Task<List<TEntity>> ReadAsync(int start, int count, CancellationToken ct = default) {
+        return await Table.Skip(start).Take(count).ToListAsync(ct);
+    }
 
     public async Task<List<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> filter, CancellationToken ct = default) {
         return await Table.Where(filter).ToListAsync(ct);

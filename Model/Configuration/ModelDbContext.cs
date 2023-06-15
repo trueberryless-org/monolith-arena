@@ -47,6 +47,7 @@ public class ModelDbContext : DbContext
     public DbSet<TilePreciseShot> TilePreciseShots { get; set; }
     public DbSet<TileStorage> TileStorages { get; set; }
     public DbSet<TileFieldLog> TileFieldLogs { get; set; }
+    public DbSet<TileGift> TileGifts { get; set; }
     public DbSet<TilePush> TilePushes { get; set; }
     public DbSet<TileFieldDirectionLog> TileFieldDirectionLogs { get; set; }
     public DbSet<TileCharge> TileCharges { get; set; }
@@ -76,8 +77,28 @@ public class ModelDbContext : DbContext
             .Property(e => e.ChampionType)
             .HasConversion<string>();
 
+        modelBuilder.Entity<Champion>()
+            .Navigation(e => e.Attacks)
+            .AutoInclude();
+        
+        modelBuilder.Entity<Champion>()
+            .Navigation(e => e.Features)
+            .AutoInclude();
+        
+        modelBuilder.Entity<Champion>()
+            .Navigation(e => e.Initiatives)
+            .AutoInclude();
+        
         modelBuilder.Entity<ChampionAttack>()
             .HasKey(e => new { e.ChampionId, e.AttackId, e.DirectionId });
+        
+        modelBuilder.Entity<ChampionAttack>()
+            .Navigation(e => e.Direction)
+            .AutoInclude();
+        
+        modelBuilder.Entity<ChampionAttack>()
+            .Navigation(e => e.Attack)
+            .AutoInclude();
 
         modelBuilder.Entity<ChampionAttack>()
             .HasOne(e => e.Champion)
@@ -96,6 +117,10 @@ public class ModelDbContext : DbContext
 
         modelBuilder.Entity<ChampionFeature>()
             .HasKey(e => new { e.ChampionId, e.FeatureId });
+        
+        modelBuilder.Entity<ChampionFeature>()
+            .Navigation(e => e.Feature)
+            .AutoInclude();
 
         modelBuilder.Entity<ChampionFeature>()
             .HasOne(e => e.Champion)
@@ -109,6 +134,10 @@ public class ModelDbContext : DbContext
         
         modelBuilder.Entity<ChampionInitiative>()
             .HasKey(e => new { e.ChampionId, e.InitiativeId });
+        
+        modelBuilder.Entity<ChampionInitiative>()
+            .Navigation(e => e.Initiative)
+            .AutoInclude();
 
         modelBuilder.Entity<ChampionInitiative>()
             .HasOne(e => e.Champion)
@@ -127,6 +156,10 @@ public class ModelDbContext : DbContext
         modelBuilder.Entity<Faction>()
             .Property(e => e.Color)
             .HasConversion<string>();
+        
+        modelBuilder.Entity<Faction>()
+            .Navigation(e => e.Tiles)
+            .AutoInclude();
 
         modelBuilder.Entity<Feature>()
             .Property(e => e.FeatureType)
@@ -135,6 +168,14 @@ public class ModelDbContext : DbContext
         modelBuilder.Entity<LogicGate>()
             .Property(e => e.LogicGateType)
             .HasConversion<string>();
+        
+        modelBuilder.Entity<LogicGate>()
+            .Navigation(e => e.OptionOneOrder)
+            .AutoInclude();
+        
+        modelBuilder.Entity<LogicGate>()
+            .Navigation(e => e.OptionTwoOrder)
+            .AutoInclude();
         
         modelBuilder.Entity<LogicGate>()
             .HasOne(e => e.OptionOneOrder)
@@ -154,8 +195,20 @@ public class ModelDbContext : DbContext
             .Property(e => e.RuneType)
             .HasConversion<string>();
         
+        modelBuilder.Entity<Rune>()
+            .Navigation(e => e.Directions)
+            .AutoInclude();
+        
+        modelBuilder.Entity<Rune>()
+            .Navigation(e => e.Features)
+            .AutoInclude();
+        
         modelBuilder.Entity<RuneDirection>()
             .HasKey(e => new { e.RuneId, e.DirectionId });
+        
+        modelBuilder.Entity<RuneDirection>()
+            .Navigation(e => e.Direction)
+            .AutoInclude();
 
         modelBuilder.Entity<RuneDirection>()
             .HasOne(e => e.Rune)
@@ -169,6 +222,10 @@ public class ModelDbContext : DbContext
 
         modelBuilder.Entity<RuneFeature>()
             .HasKey(e => new { e.RuneId, e.FeatureId });
+        
+        modelBuilder.Entity<RuneFeature>()
+            .Navigation(e => e.Feature)
+            .AutoInclude();
 
         modelBuilder.Entity<RuneFeature>()
             .HasOne(e => e.Rune)
@@ -181,10 +238,38 @@ public class ModelDbContext : DbContext
             .HasForeignKey(e => e.FeatureId);
         
         modelBuilder.Entity<Tile>()
+            .Navigation(e => e.Faction)
+            .AutoInclude();
+        
+        modelBuilder.Entity<Tile>()
             .HasOne(e => e.Faction)
             .WithMany(e => e.Tiles)
             .HasForeignKey(e => e.FactionId);
 
+        
+        modelBuilder.Entity<Game>()
+            .Navigation(e => e.Users)
+            .AutoInclude();
+        
+        modelBuilder.Entity<Game>()
+            .Navigation(e => e.Positions)
+            .AutoInclude();
+        
+        modelBuilder.Entity<Game>()
+            .Navigation(e => e.Logs)
+            .AutoInclude();
+        
+        modelBuilder.Entity<GameLog>()
+            .Navigation(e => e.Game)
+            .AutoInclude();
+        
+        modelBuilder.Entity<GameLog>()
+            .Navigation(e => e.User)
+            .AutoInclude();
+        
+        modelBuilder.Entity<GameLog>()
+            .Navigation(e => e.Position)
+            .AutoInclude();
 
         modelBuilder.Entity<GameLog>()
             .HasOne(e => e.Game)
@@ -200,16 +285,28 @@ public class ModelDbContext : DbContext
             .HasOne(e => e.User)
             .WithMany()
             .HasForeignKey(e => e.UserId);
+        
+        modelBuilder.Entity<TileLog>()
+            .Navigation(e => e.Tile)
+            .AutoInclude();
 
         modelBuilder.Entity<TileLog>()
             .HasOne(e => e.Tile)
             .WithMany()
             .HasForeignKey(e => e.TileId);
+        
+        modelBuilder.Entity<TileFieldLog>()
+            .Navigation(e => e.Field)
+            .AutoInclude();
 
         modelBuilder.Entity<TileFieldLog>()
             .HasOne(e => e.Field)
             .WithMany()
             .HasForeignKey(e => e.FieldId);
+        
+        modelBuilder.Entity<TileFieldDirectionLog>()
+            .Navigation(e => e.Direction)
+            .AutoInclude();
 
         modelBuilder.Entity<TileFieldDirectionLog>()
             .HasOne(e => e.Direction)
@@ -218,6 +315,22 @@ public class ModelDbContext : DbContext
 
         modelBuilder.Entity<TileField>()
             .HasKey(e => new { e.FieldId, e.TileId, e.PositionId });
+        
+        modelBuilder.Entity<TileField>()
+            .Navigation(e => e.Field)
+            .AutoInclude();
+        
+        modelBuilder.Entity<TileField>()
+            .Navigation(e => e.Tile)
+            .AutoInclude();
+        
+        modelBuilder.Entity<TileField>()
+            .Navigation(e => e.Position)
+            .AutoInclude();
+        
+        modelBuilder.Entity<TileField>()
+            .Navigation(e => e.Direction)
+            .AutoInclude();
 
         modelBuilder.Entity<TileField>()
             .HasOne(e => e.Field)
@@ -238,6 +351,14 @@ public class ModelDbContext : DbContext
             .HasOne(e => e.Direction)
             .WithMany()
             .HasForeignKey(e => e.DirectionId);
+        
+        modelBuilder.Entity<Position>()
+            .Navigation(e => e.Fields)
+            .AutoInclude();
+        
+        modelBuilder.Entity<Position>()
+            .Navigation(e => e.Logs)
+            .AutoInclude();
 
         modelBuilder.Entity<Position>()
             .HasOne(e => e.Game)
@@ -246,6 +367,18 @@ public class ModelDbContext : DbContext
 
         modelBuilder.Entity<UserGame>()
             .HasKey(e => new { e.UserId, e.GameId });
+        
+        modelBuilder.Entity<UserGame>()
+            .Navigation(e => e.User)
+            .AutoInclude();
+        
+        modelBuilder.Entity<UserGame>()
+            .Navigation(e => e.Game)
+            .AutoInclude();
+        
+        modelBuilder.Entity<UserGame>()
+            .Navigation(e => e.Faction)
+            .AutoInclude();
 
         modelBuilder.Entity<UserGame>()
             .HasOne(e => e.User)

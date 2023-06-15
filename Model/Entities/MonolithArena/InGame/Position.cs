@@ -14,9 +14,7 @@ public class Position
     
     public int Order { get; set; }
     
-    [NotMapped] 
     public List<TileField> Fields { get; set; }
     
-    [NotMapped]
     public List<GameLog> Logs { get; set; }
 }
