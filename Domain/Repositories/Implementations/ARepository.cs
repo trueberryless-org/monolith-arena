@@ -43,18 +43,25 @@ public abstract class ARepository<TEntity> : IRepository<TEntity> where TEntity 
         await Context.SaveChangesAsync(ct);
     }
 
-    public async Task UpdateAsync(IEnumerable<TEntity> entity, CancellationToken ct = default) {
+    public async Task UpdateAsync(List<TEntity> entity, CancellationToken ct = default) {
         Context.ChangeTracker.Clear();
         Table.UpdateRange(entity);
         await Context.SaveChangesAsync(ct);
     }
 
+    public async Task DeleteAsync(int id, CancellationToken ct = default)
+    {
+        var entity = await Table.FindAsync(new object?[] { id }, ct);
+        if (entity != null) Table.Remove(entity);
+        await Context.SaveChangesAsync(ct);
+    }
+    
     public async Task DeleteAsync(TEntity entity, CancellationToken ct = default) {
         Table.Remove(entity);
         await Context.SaveChangesAsync(ct);
     }
 
-    public async Task DeleteAsync(IEnumerable<TEntity> entity, CancellationToken ct = default) {
+    public async Task DeleteAsync(List<TEntity> entity, CancellationToken ct = default) {
         Table.RemoveRange(entity);
         await Context.SaveChangesAsync(ct);
     }

@@ -8,5 +8,6 @@ public class Attack
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     
+    [Column("ATTACK_TYPE")]
     public AttackType AttackType { get; set; }
 }

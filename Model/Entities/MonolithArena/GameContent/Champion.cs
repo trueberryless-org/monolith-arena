@@ -13,9 +13,4 @@ public class Champion : Tile
     public List<ChampionFeature> Features { get; set; }
     
     public List<ChampionInitiative> Initiatives { get; set; }
-
-    public ChampionType ChampionType { get; set; }
-    
-    [Column("QUANTITY")]
-    public int Quantity { get; set; }
 }

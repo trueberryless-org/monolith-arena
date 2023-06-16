@@ -1,6 +1,4 @@
-﻿using Model.Entities.MonolithArena.InGame.Logs;
-
-namespace Model.Entities.MonolithArena.InGame;
+﻿namespace Model.Entities.MonolithArena.InGame;
 
 [Table("POSITIONS")]
 public class Position

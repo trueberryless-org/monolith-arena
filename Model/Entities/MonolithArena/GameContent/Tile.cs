@@ -9,4 +9,7 @@ public class Tile
     [Column("FACTION_ID")]
     public int FactionId { get; set; }
     public Faction Faction { get; set; }
+    
+    [Column("QUANTITY")]
+    public int Quantity { get; set; }
 }

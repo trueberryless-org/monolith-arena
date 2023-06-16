@@ -29,7 +29,6 @@ public class User {
     
     public List<RoleClaim> RoleClaims { get; set; }
     
-    [NotMapped]
     public List<UserGame> Games { get; set; }
 
     [NotMapped] 
