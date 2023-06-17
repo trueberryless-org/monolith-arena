@@ -123,12 +123,16 @@ public class ModelDbContext : DbContext
             .Navigation(e => e.Initiatives)
             .AutoInclude();
         
-        modelBuilder.Entity<ChampionAttack>()
-            .Navigation(e => e.Direction)
+        modelBuilder.Entity<Banner>()
+            .Navigation(e => e.SpecialFeature)
             .AutoInclude();
         
         modelBuilder.Entity<ChampionAttack>()
             .Navigation(e => e.Attack)
+            .AutoInclude();
+        
+        modelBuilder.Entity<ChampionAttack>()
+            .Navigation(e => e.Direction)
             .AutoInclude();
         
         modelBuilder.Entity<ChampionFeature>()
@@ -143,14 +147,6 @@ public class ModelDbContext : DbContext
             .Navigation(e => e.Tiles)
             .AutoInclude();
         
-        modelBuilder.Entity<LogicGate>()
-            .Navigation(e => e.OptionOneOrder)
-            .AutoInclude();
-        
-        modelBuilder.Entity<LogicGate>()
-            .Navigation(e => e.OptionTwoOrder)
-            .AutoInclude();
-        
         modelBuilder.Entity<Rune>()
             .Navigation(e => e.Directions)
             .AutoInclude();
@@ -159,12 +155,24 @@ public class ModelDbContext : DbContext
             .Navigation(e => e.Features)
             .AutoInclude();
         
+        modelBuilder.Entity<Rune>()
+            .Navigation(e => e.SpecialFeature)
+            .AutoInclude();
+        
         modelBuilder.Entity<RuneDirection>()
             .Navigation(e => e.Direction)
             .AutoInclude();
         
         modelBuilder.Entity<RuneFeature>()
             .Navigation(e => e.Feature)
+            .AutoInclude();
+        
+        modelBuilder.Entity<LogicGate>()
+            .Navigation(e => e.OptionOneOrder)
+            .AutoInclude();
+        
+        modelBuilder.Entity<LogicGate>()
+            .Navigation(e => e.OptionTwoOrder)
             .AutoInclude();
         
         #endregion
