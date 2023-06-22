@@ -1,56 +1,68 @@
 ﻿@page "/"
+@using Model.Entities.MonolithArena.InGame
+@using WebApi.Dtos
+@using Position = Model.Entities.MonolithArena.InGame.Position
+@using Mapster
+@inject HttpClient Http
+@inject IGameRepository GameRepository
+
+@inject NavigationManager NavigationManager
 
 <MudContainer>
-
-    <MudText Typo="Typo.h5" Class="my-5">Recent Games</MudText>
-    <MudContainer Class="pl-0 pr-0 d-flex align-self-center" Style="margin-bottom: 5vh">
-        @for (var i = 0; i < 5; i++)
-        {
-            <MudPaper Href="" Class="paper-link" Elevation="5">
-                <div>
-                    <MudText Typo="Typo.subtitle1">Name</MudText>
-                    <MudText Typo="Typo.subtitle1">Faction</MudText>
-                    <MudText Typo="Typo.subtitle1">vs</MudText>
-                    <MudText Typo="Typo.subtitle1">Name</MudText>
-                    <MudText Typo="Typo.subtitle1">Faction</MudText>
-                </div>
-            </MudPaper>
-        }
-    </MudContainer>
+    @if (games.Count > 1)
+    {
+        <MudText Typo="Typo.h5" Class="my-5">Recent Games</MudText>
+        <MudContainer Class="pl-0 pr-0 d-flex align-self-center" Style="margin-bottom: 5vh">
+            <DataInit Data="games">
+                <ChildContent Context="games">
+                    @foreach (var game in games)
+                    {
+                        <MudPaper Href="" Class="paper-link" Elevation="5">
+                            <div>
+                                <MudText Typo="Typo.subtitle1">
+                                    @string.Join(" vs ", game.Users.Select(e => e.User.Username))
+                                </MudText>
+                            </div>
+                        </MudPaper>
+                    }
+                </ChildContent>
+            </DataInit>
+        </MudContainer>
+    }
 
     <MudText Typo="Typo.h5" Class="my-5">Actions</MudText>
     <MudContainer Class="pl-0 pr-0 d-flex align-self-center" Style="margin-bottom: 5vh">
-        <MudPaper Href="" Class="paper-link" Elevation="5">
+        <MudPaper onclick="@CreateLobby" Class="paper-link" Elevation="5">
             <div>
                 <MudIcon Icon="@Icons.Material.Rounded.Add" Size="Size.Large"/>
                 <MudText Typo="Typo.subtitle1">Create new game</MudText>
             </div>
         </MudPaper>
-        <MudPaper Href="" Class="paper-link" Elevation="5">
+        <MudPaper onclick="@JoinLobby" Class="paper-link" Elevation="5">
             <div>
                 <MudIcon Icon="@Icons.Material.Rounded.ConnectWithoutContact" Size="Size.Large"/>
                 <MudText Typo="Typo.subtitle1">Join Lobby</MudText>
             </div>
         </MudPaper>
-        <MudPaper Href="" Class="paper-link" Elevation="5">
+        <MudPaper onclick="@SpectateGame" Class="paper-link" Elevation="5">
             <div>
                 <MudIcon Icon="@Icons.Material.Rounded.RemoveRedEye" Size="Size.Large"/>
-                <MudText Typo="Typo.subtitle1">Watch game</MudText>
+                <MudText Typo="Typo.subtitle1">Spectate game</MudText>
             </div>
         </MudPaper>
-        <MudPaper Href="" Class="paper-link" Elevation="5">
+        <MudPaper onclick="@GoToUsers" Class="paper-link" Elevation="5">
             <div>
                 <MudIcon Icon="@Icons.Material.Rounded.People" Size="Size.Large"/>
                 <MudText Typo="Typo.subtitle1">Users</MudText>
             </div>
         </MudPaper>
-        <MudPaper Href="" Class="paper-link" Elevation="5">
+        <MudPaper onclick="@GoToGames" Class="paper-link" Elevation="5">
             <div>
                 <MudIcon Icon="@Icons.Material.Rounded.VideogameAsset" Size="Size.Large"/>
                 <MudText Typo="Typo.subtitle1">Games</MudText>
             </div>
         </MudPaper>
-        <MudPaper Href="" Class="paper-link" Elevation="5">
+        <MudPaper onclick="@GoToSearch" Class="paper-link" Elevation="5">
             <div>
                 <MudIcon Icon="@Icons.Material.Rounded.Search" Size="Size.Large"/>
                 <MudText Typo="Typo.subtitle1">
@@ -64,12 +76,50 @@
 
 @code {
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (!firstRender) return;
+    private List<GameListDto> games = new List<GameListDto>();
 
-        if (!await UserService.IsAuthenticated())
-            NavigationManager.NavigateTo(NavigationProvider["Login"].Link);
+    protected override async Task OnInitializedAsync()
+    {
+        //Console.WriteLine(NavigationManager.BaseUri);
+        //Console.WriteLine(await Http.GetAsync("api/games"));
+        // games = await Http.GetFromJsonAsync<List<GameListDto>>("api/games");
+        games = (await GameRepository.ReadAsync()).Select(e => e.Adapt<GameListDto>()).ToList();
+
+        await GameRepository.DeleteAsync(e => e.StartedAt < DateTime.Now.AddMonths(-2) && ! e.Users.Any(f => f.StarredThisGame));
+    }
+
+    private async Task CreateLobby()
+    {
+        // var gameResponse = await Http.PostAsJsonAsync("api/games", new GameCreateDto(new List<Position>(), new List<UserGame>(), new List<GameLog>()));
+        var game = await GameRepository.CreateAsync(
+            new GameCreateDto(new List<Position>(), new List<UserGame>(), new List<GameLog>()).Adapt<Game>());
+        
+        NavigationManager.NavigateTo($"/lobby/{game.Id}");
+    }
+
+    private void JoinLobby()
+    {
+        NavigationManager.NavigateTo("/lobbies");
+    }
+
+    private void SpectateGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void GoToUsers()
+    {
+        NavigationManager.NavigateTo("/users");
+    }
+
+    private void GoToGames()
+    {
+        NavigationManager.NavigateTo("/games");
+    }
+
+    private void GoToSearch()
+    {
+        NavigationManager.NavigateTo("/search");
     }
 
 }

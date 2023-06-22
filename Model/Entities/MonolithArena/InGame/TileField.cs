@@ -1,5 +1,6 @@
-﻿using Model.Entities.MonolithArena.GameContent;
-using Direction = Model.Entities.MonolithArena.GameContent.Direction;
+﻿using System.Text.Json.Serialization;
+using Model.Entities.MonolithArena.Enums;
+using Model.Entities.MonolithArena.GameContent;
 
 namespace Model.Entities.MonolithArena.InGame;
 
@@ -16,9 +17,9 @@ public class TileField
     
     [Column("POSITION_ID")]
     public int PositionId { get; set; }
+    [JsonIgnore]
     public Position Position { get; set; }
     
-    [Column("FACING")]
-    public int DirectionId { get; set; }
-    public Direction Direction { get; set; }
+    [Column("DIRECTION")]
+    public DirectionType Direction { get; set; }
 }

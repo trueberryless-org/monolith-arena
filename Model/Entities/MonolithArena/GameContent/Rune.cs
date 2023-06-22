@@ -10,8 +10,4 @@ public class Rune : Tile
     public List<RuneDirection> Directions { get; set; }
     
     public List<RuneFeature> Features { get; set; }
-    
-    [Column("SPECIAL_FEATURE_ID")]
-    public int SpecialFeatureId { get; set; }
-    public Feature SpecialFeature { get; set; }
 }

@@ -14,5 +14,6 @@ public enum RuneType
     TELEPORTATION,
     PENETRATION,
     EXHAUSTION,
-    MESMERIZATION
+    MESMERIZATION,
+    CHARGE
 }

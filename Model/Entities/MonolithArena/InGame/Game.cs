@@ -11,4 +11,10 @@ public class Game
     public List<UserGame> Users { get; set; }
     
     public List<GameLog> Logs { get; set; }
+    
+    [Column("STARTED_AT")]
+    public DateTime? StartedAt { get; set; }
+    
+    [Column("ENDED_AT")]
+    public DateTime? EndedAt { get; set; }
 }

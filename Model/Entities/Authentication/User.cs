@@ -1,4 +1,5 @@
-﻿using Model.Entities.MonolithArena.InGame;
+﻿using System.Text.Json.Serialization;
+using Model.Entities.MonolithArena.InGame;
 
 namespace Model.Entities.Authentication;
 
@@ -29,6 +30,7 @@ public class User {
     
     public List<RoleClaim> RoleClaims { get; set; }
     
+    [JsonIgnore]
     public List<UserGame> Games { get; set; }
 
     [NotMapped] 

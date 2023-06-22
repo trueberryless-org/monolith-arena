@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using Model.Entities;
+using Model.Entities.MonolithArena.Enums;
 using MudBlazor;
 using MudBlazor.Services;
 using Pomelo.EntityFrameworkCore.MySql.Internal;
@@ -44,6 +45,14 @@ builder.Services.AddMudServices(config =>
 });
 
 // Repositories
+builder.Services.AddScoped(sp =>
+{
+    var navigationManager = sp.GetRequiredService<NavigationManager>();
+    var httpClient = new HttpClient { BaseAddress = new Uri(navigationManager.BaseUri) };
+    return httpClient;
+});
+builder.Services.AddScoped<IGameRepository, GameRepository>();
+
 builder.Services.AddScoped<ILogEntryRepository, LogEntryRepository>();
 builder.Services.AddScoped<IRoleClaimRepository, RoleClaimRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();

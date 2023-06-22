@@ -2,7 +2,8 @@
 
 namespace Model.Entities.MonolithArena.GameContent;
 
-[Table("ORDERS_BT")]
+[Table("ORDERS")]
 public class Order : Tile
 {
+    public OrderType OrderType { get; set; }
 }

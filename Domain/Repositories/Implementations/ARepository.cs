@@ -61,8 +61,8 @@ public abstract class ARepository<TEntity> : IRepository<TEntity> where TEntity 
         await Context.SaveChangesAsync(ct);
     }
 
-    public async Task DeleteAsync(List<TEntity> entity, CancellationToken ct = default) {
-        Table.RemoveRange(entity);
+    public async Task DeleteAsync(List<TEntity> entities, CancellationToken ct = default) {
+        Table.RemoveRange(entities);
         await Context.SaveChangesAsync(ct);
     }
 

@@ -1,7 +1,7 @@
-﻿using Model.Entities.Authentication;
+﻿using System.Text.Json.Serialization;
+using Model.Entities.Authentication;
 using Model.Entities.MonolithArena.Enums;
 using Model.Entities.MonolithArena.GameContent;
-using Direction = Model.Entities.MonolithArena.GameContent.Direction;
 
 namespace Model.Entities.MonolithArena.InGame;
 
@@ -13,6 +13,7 @@ public class GameLog
     
     [Column("GAME_ID")]
     public int GameId { get; set; }
+    [JsonIgnore]
     public Game Game { get; set; }
     
     [Column("POSITION_ID")]
@@ -31,9 +32,8 @@ public class GameLog
     public int? FieldId { get; set; }
     public Field? Field { get; set; }
     
-    [Column("FACING")]
-    public int? DirectionId { get; set; }
-    public Direction? Direction { get; set; }
+    [Column("DIRECTION")]
+    public DirectionType Direction { get; set; }
     
     [Column("LOG_TYPE")]
     public GameLogType LogType { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace Model.Entities.MonolithArena.InGame;
+﻿using System.Text.Json.Serialization;
+
+namespace Model.Entities.MonolithArena.InGame;
 
 [Table("POSITIONS")]
 public class Position
@@ -8,6 +10,7 @@ public class Position
     
     [Column("GAME_ID")]
     public int GameId { get; set; }
+    [JsonIgnore]
     public Game Game { get; set; }
     
     public int Order { get; set; }

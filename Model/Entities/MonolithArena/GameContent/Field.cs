@@ -4,6 +4,7 @@
 public class Field
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("ID")]
     public int Id { get; set; }
     
     public int X { get; set; }

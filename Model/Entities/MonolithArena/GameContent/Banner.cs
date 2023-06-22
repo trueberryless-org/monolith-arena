@@ -1,11 +1,14 @@
-﻿namespace Model.Entities.MonolithArena.GameContent;
+﻿using Model.Entities.MonolithArena.Enums;
+
+namespace Model.Entities.MonolithArena.GameContent;
 
 [Table("BANNERS")]
 public class Banner : Champion
 {
-    [Column("SPECIAL_FEATURE_ID")]
-    public int SpecialFeatureId { get; set; }
-    public Feature SpecialFeature { get; set; }
+    public BannerType BannerType { get; set; }
 
-    [Column("HEALTH")] public int Health = 20;
+    public List<BannerDirection> Directions { get; set; }
+
+    [Column("HEALTH")] 
+    public int Health { get; set; } = 20;
 }

@@ -6,6 +6,7 @@ namespace Model.Entities.MonolithArena.GameContent;
 public class Faction
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("ID")]
     public int Id { get; set; }
     
     [Column("NAME")]

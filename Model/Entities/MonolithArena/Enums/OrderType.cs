@@ -13,5 +13,7 @@ public enum OrderType
     CHARGE,
     ENTRENCHMENT,
     MANA_CHARGE,
-    DARKNESS
+    DARKNESS,
+    
+    BATTLE_OR_CHARGE
 }

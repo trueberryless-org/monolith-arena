@@ -2,9 +2,9 @@
 
 public enum FactionColor
 {
-    ORANGE,
-    RED,
     BLUE,
+    RED,
+    ORANGE,
     GREEN,
     YELLOW
 }

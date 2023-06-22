@@ -22,33 +22,29 @@ public abstract class AController<ITEntityRepository, TEntity, TListDto, TDetail
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<TEntity>>> Get()
+    public async Task<ActionResult<List<TListDto>>> Get()
         => Ok(await Repository.ReadAsync());
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<TEntity?>> Get(int id)
+    public async Task<ActionResult<TDetailDto?>> Get(int id)
         => Ok(await Repository.ReadAsync(id));
 
     [HttpGet("{start:int}/{count:int}")]
-    public async Task<ActionResult<TEntity?>> Get(int start, int count)
+    public async Task<ActionResult<TListDto?>> Get(int start, int count)
         => Ok(await Repository.ReadAsync(start, count));
 
-    [HttpGet("filter/")]
-    public async Task<ActionResult<TEntity?>> Get(Expression<Func<TEntity, bool>> filter)
+    [HttpGet("filter")]
+    public async Task<ActionResult<TListDto?>> Get(Expression<Func<TEntity, bool>> filter)
         => Ok(await Repository.ReadAsync(filter));
 
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<TListDto>> Post(TCreateDto entity)
-        => StatusCode(201,
-            (await Repository.CreateAsync(entity.Adapt<TEntity>()))
+        => Ok((await Repository.CreateAsync(entity.Adapt<TEntity>()))
             .Adapt<TListDto>());
 
-    [HttpPost("list/")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
+    [HttpPost("list")]
     public async Task<ActionResult<List<TListDto>>> Post(List<TCreateDto> entities)
-        => StatusCode(201,
-            (await Repository.CreateAsync(entities.Select(e => e.Adapt<TEntity>()).ToList()))
+        => Ok((await Repository.CreateAsync(entities.Select(e => e.Adapt<TEntity>()).ToList()))
             .Select(e => e.Adapt<TListDto>()).ToList());
 
     [HttpPut]
@@ -58,7 +54,7 @@ public abstract class AController<ITEntityRepository, TEntity, TListDto, TDetail
         return Ok();
     }
 
-    [HttpPut("list/")]
+    [HttpPut("list")]
     public async Task<ActionResult> Update(List<TUpdateDto> entities)
     {
         await Repository.UpdateAsync(entities.Select(e => e.Adapt<TEntity>()).ToList());
@@ -79,14 +75,14 @@ public abstract class AController<ITEntityRepository, TEntity, TListDto, TDetail
         return Ok();
     }
 
-    [HttpDelete("list/")]
+    [HttpDelete("list")]
     public async Task<ActionResult> Delete(List<TDeleteDto> entities)
     {
         await Repository.DeleteAsync(entities.Select(e => e.Adapt<TEntity>()).ToList());
         return Ok();
     }
 
-    [HttpDelete("filter/")]
+    [HttpDelete("filter")]
     public async Task<ActionResult> Delete(Expression<Func<TEntity, bool>> filter)
     {
         await Repository.DeleteAsync(filter);

@@ -1,0 +1,43 @@
+﻿@page "/lobbies"
+@using WebApi.Dtos
+@using System.Net
+@using Mapster
+@inject HttpClient Http
+@inject IGameRepository GameRepository
+
+<MudContainer>
+    @if (lobbies.Count > 1)
+    {
+        <MudText Typo="Typo.h5" Class="my-5">Recent Games</MudText>
+        <MudContainer Class="pl-0 pr-0 d-flex align-self-center" Style="margin-bottom: 5vh">
+            <DataInit Data="lobbies">
+                <ChildContent Context="lobbies">
+                    @foreach (var lobby in lobbies)
+                    {
+                        <MudPaper Href="" Class="paper-link" Elevation="5">
+                            <div>
+                                <MudText Typo="Typo.subtitle1">
+                                    @lobby.Id
+                                </MudText>
+                            </div>
+                        </MudPaper>
+                    }
+                </ChildContent>
+            </DataInit>
+        </MudContainer>
+    }
+</MudContainer>
+
+@code {
+
+    private List<GameListDto> lobbies = new List<GameListDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine(NavigationManager.BaseUri);
+        Console.WriteLine(await Http.GetAsync("api/games"));
+    // games = await Http.GetFromJsonAsync<List<GameListDto>>("api/games");
+        lobbies = (await GameRepository.ReadAsync(e => e.StartedAt == null)).Select(e => e.Adapt<GameListDto>()).ToList();
+    }
+    
+}

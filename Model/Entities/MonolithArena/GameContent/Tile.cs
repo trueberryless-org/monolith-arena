@@ -4,6 +4,7 @@
 public class Tile
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("ID")]
     public int Id { get; set; }
     
     [Column("FACTION_ID")]

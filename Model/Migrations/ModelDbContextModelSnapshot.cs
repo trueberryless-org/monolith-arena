@@ -138,106 +138,1170 @@ namespace Model.Migrations
                     b.ToTable("LOG_ENTRIES");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Attack", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.BannerDirection", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
 
-                    b.Property<string>("AttackType")
+                    b.Property<int>("BannerId")
+                        .HasColumnType("int")
+                        .HasColumnName("BANNER_ID");
+
+                    b.Property<string>("Direction")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("ATTACK_TYPE");
+                        .HasColumnName("DIRECTION");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ATTACKS");
+                    b.HasIndex("BannerId");
+
+                    b.ToTable("BANNER_HAS_DIRECTIONS_JT");
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionAttack", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
+                    b.Property<string>("Attack")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("ATTACK");
+
                     b.Property<int>("ChampionId")
                         .HasColumnType("int")
                         .HasColumnName("CHAMPION_ID");
 
-                    b.Property<int>("AttackId")
-                        .HasColumnType("int")
-                        .HasColumnName("ATTACK_ID");
-
-                    b.Property<int>("DirectionId")
-                        .HasColumnType("int")
-                        .HasColumnName("DIRECTION_ID");
+                    b.Property<string>("Direction")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("DIRECTION");
 
                     b.Property<int>("Strength")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("STRENGTH");
 
-                    b.HasKey("ChampionId", "AttackId", "DirectionId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AttackId");
-
-                    b.HasIndex("DirectionId");
+                    b.HasIndex("ChampionId");
 
                     b.ToTable("CHAMPION_HAS_ATTACKS_JT");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 101,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 101,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 102,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 101,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 103,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 101,
+                            Direction = "SOUTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 104,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 101,
+                            Direction = "SOUTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 105,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 101,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 106,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 101,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 107,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 102,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 108,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 102,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 109,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 102,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 110,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 102,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 111,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 103,
+                            Direction = "NORTH_WEST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 112,
+                            Attack = "ARMOR",
+                            ChampionId = 103,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 113,
+                            Attack = "ARMOR",
+                            ChampionId = 103,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 114,
+                            Attack = "ARMOR",
+                            ChampionId = 103,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 115,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 104,
+                            Direction = "NORTH_WEST",
+                            Strength = 3
+                        },
+                        new
+                        {
+                            Id = 116,
+                            Attack = "ARMOR",
+                            ChampionId = 104,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 117,
+                            Attack = "ARMOR",
+                            ChampionId = 104,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 118,
+                            Attack = "ARMOR",
+                            ChampionId = 104,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 119,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 105,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 120,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 105,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 121,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 106,
+                            Direction = "NORTH_EAST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 122,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 106,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 123,
+                            Attack = "ARMOR",
+                            ChampionId = 106,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 124,
+                            Attack = "ARMOR",
+                            ChampionId = 106,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 125,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 107,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 126,
+                            Attack = "ARMOR",
+                            ChampionId = 107,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 201,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 201,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 202,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 201,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 203,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 201,
+                            Direction = "SOUTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 204,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 201,
+                            Direction = "SOUTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 205,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 201,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 206,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 201,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 207,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 202,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 208,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 202,
+                            Direction = "SOUTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 209,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 202,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 210,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 203,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 211,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 204,
+                            Direction = "WEST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 212,
+                            Attack = "ARMOR",
+                            ChampionId = 204,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 213,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 204,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 214,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 205,
+                            Direction = "NORTH_WEST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 215,
+                            Attack = "NET",
+                            ChampionId = 205,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 216,
+                            Attack = "NET",
+                            ChampionId = 206,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 217,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 207,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 218,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 207,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 219,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 208,
+                            Direction = "WEST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 220,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 208,
+                            Direction = "NORTH_WEST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 221,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 208,
+                            Direction = "NORTH_EAST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 301,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 301,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 302,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 301,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 303,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 301,
+                            Direction = "SOUTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 304,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 301,
+                            Direction = "SOUTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 305,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 301,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 306,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 301,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 307,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 302,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 308,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 302,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 309,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 302,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 310,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 303,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 311,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 303,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 312,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 304,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 313,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 304,
+                            Direction = "NORTH_WEST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 314,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 304,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 315,
+                            Attack = "ARMOR",
+                            ChampionId = 304,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 316,
+                            Attack = "ARMOR",
+                            ChampionId = 305,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 317,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 306,
+                            Direction = "SOUTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 318,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 306,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 319,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 306,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 320,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 306,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 321,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 307,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 322,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 308,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 323,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 308,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 324,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 308,
+                            Direction = "SOUTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 325,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 308,
+                            Direction = "SOUTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 326,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 308,
+                            Direction = "WEST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 327,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 308,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 401,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 401,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 402,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 401,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 403,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 401,
+                            Direction = "SOUTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 404,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 401,
+                            Direction = "SOUTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 405,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 401,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 406,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 401,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 407,
+                            Attack = "KILL_ATTACK",
+                            ChampionId = 402,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 408,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 403,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 409,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 403,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 410,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 404,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 411,
+                            Attack = "RANGED_ATTACK",
+                            ChampionId = 405,
+                            Direction = "NORTH_WEST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 412,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 406,
+                            Direction = "WEST",
+                            Strength = 2
+                        },
+                        new
+                        {
+                            Id = 413,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 407,
+                            Direction = "ENTIRE_BOARD",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 414,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 408,
+                            Direction = "NORTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 415,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 408,
+                            Direction = "EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 416,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 408,
+                            Direction = "SOUTH_EAST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 417,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 408,
+                            Direction = "SOUTH_WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 418,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 408,
+                            Direction = "WEST",
+                            Strength = 1
+                        },
+                        new
+                        {
+                            Id = 419,
+                            Attack = "MELEE_ATTACK",
+                            ChampionId = 408,
+                            Direction = "NORTH_WEST",
+                            Strength = 1
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionFeature", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
                     b.Property<int>("ChampionId")
                         .HasColumnType("int")
                         .HasColumnName("CHAMPION_ID");
 
-                    b.Property<int>("FeatureId")
-                        .HasColumnType("int")
-                        .HasColumnName("FEATURE_ID");
+                    b.Property<string>("Feature")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("FEATURE");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int")
                         .HasColumnName("QUANTITY");
 
-                    b.HasKey("ChampionId", "FeatureId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("FeatureId");
+                    b.HasIndex("ChampionId");
 
                     b.ToTable("CHAMPION_HAS_FEATURES_JT");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 101,
+                            ChampionId = 103,
+                            Feature = "TOUGHNESS",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 102,
+                            ChampionId = 103,
+                            Feature = "MANEUVER",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 103,
+                            ChampionId = 103,
+                            Feature = "CAVALRY",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 104,
+                            ChampionId = 104,
+                            Feature = "MANEUVER",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 105,
+                            ChampionId = 104,
+                            Feature = "CAVALRY",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 201,
+                            ChampionId = 202,
+                            Feature = "VENOM",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 202,
+                            ChampionId = 206,
+                            Feature = "TELEPORT",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 203,
+                            ChampionId = 207,
+                            Feature = "MANEUVER",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 204,
+                            ChampionId = 208,
+                            Feature = "TRANSFORMATION",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 301,
+                            ChampionId = 303,
+                            Feature = "TOUGHNESS",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 302,
+                            ChampionId = 305,
+                            Feature = "MANEUVER",
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 303,
+                            ChampionId = 307,
+                            Feature = "MANEUVER",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 304,
+                            ChampionId = 308,
+                            Feature = "TOUGHNESS",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 401,
+                            ChampionId = 406,
+                            Feature = "MANEUVER",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 402,
+                            ChampionId = 407,
+                            Feature = "INFINITY_ATTACK",
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 403,
+                            ChampionId = 408,
+                            Feature = "MANEUVER",
+                            Quantity = 1
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionInitiative", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
                     b.Property<int>("ChampionId")
                         .HasColumnType("int")
                         .HasColumnName("CHAMPION_ID");
 
-                    b.Property<int>("InitiativeId")
+                    b.Property<int>("Initiative")
                         .HasColumnType("int")
-                        .HasColumnName("INITIATIVE_ID");
-
-                    b.HasKey("ChampionId", "InitiativeId");
-
-                    b.HasIndex("InitiativeId");
-
-                    b.ToTable("CHAMPION_HAS_INITIATIVES_JT");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Direction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("DirectionType")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnName("INITIATIVE");
 
                     b.HasKey("Id");
 
-                    b.ToTable("DIRECTIONS");
+                    b.HasIndex("ChampionId");
+
+                    b.ToTable("CHAMPION_HAS_INITIATIVES_JT");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 101,
+                            ChampionId = 101,
+                            Initiative = 0
+                        },
+                        new
+                        {
+                            Id = 102,
+                            ChampionId = 102,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 103,
+                            ChampionId = 103,
+                            Initiative = 1
+                        },
+                        new
+                        {
+                            Id = 104,
+                            ChampionId = 104,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 105,
+                            ChampionId = 105,
+                            Initiative = 3
+                        },
+                        new
+                        {
+                            Id = 106,
+                            ChampionId = 106,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 107,
+                            ChampionId = 107,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 201,
+                            ChampionId = 201,
+                            Initiative = 0
+                        },
+                        new
+                        {
+                            Id = 202,
+                            ChampionId = 202,
+                            Initiative = 3
+                        },
+                        new
+                        {
+                            Id = 203,
+                            ChampionId = 203,
+                            Initiative = 1
+                        },
+                        new
+                        {
+                            Id = 204,
+                            ChampionId = 204,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 205,
+                            ChampionId = 205,
+                            Initiative = 0
+                        },
+                        new
+                        {
+                            Id = 206,
+                            ChampionId = 207,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 207,
+                            ChampionId = 208,
+                            Initiative = 1
+                        },
+                        new
+                        {
+                            Id = 301,
+                            ChampionId = 301,
+                            Initiative = 0
+                        },
+                        new
+                        {
+                            Id = 302,
+                            ChampionId = 302,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 303,
+                            ChampionId = 302,
+                            Initiative = 1
+                        },
+                        new
+                        {
+                            Id = 304,
+                            ChampionId = 303,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 305,
+                            ChampionId = 304,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 306,
+                            ChampionId = 306,
+                            Initiative = 3
+                        },
+                        new
+                        {
+                            Id = 307,
+                            ChampionId = 307,
+                            Initiative = 3
+                        },
+                        new
+                        {
+                            Id = 308,
+                            ChampionId = 308,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 401,
+                            ChampionId = 401,
+                            Initiative = 0
+                        },
+                        new
+                        {
+                            Id = 402,
+                            ChampionId = 402,
+                            Initiative = -1
+                        },
+                        new
+                        {
+                            Id = 403,
+                            ChampionId = 403,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 404,
+                            ChampionId = 404,
+                            Initiative = 3
+                        },
+                        new
+                        {
+                            Id = 405,
+                            ChampionId = 404,
+                            Initiative = 0
+                        },
+                        new
+                        {
+                            Id = 406,
+                            ChampionId = 405,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 407,
+                            ChampionId = 406,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 408,
+                            ChampionId = 407,
+                            Initiative = 3
+                        },
+                        new
+                        {
+                            Id = 409,
+                            ChampionId = 408,
+                            Initiative = 2
+                        },
+                        new
+                        {
+                            Id = 410,
+                            ChampionId = 408,
+                            Initiative = 1
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Faction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -251,28 +1315,40 @@ namespace Model.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FACTIONS");
-                });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Feature", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("FeatureType")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FEATURES");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Color = "BLUE",
+                            Name = "Dragon Empire"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Color = "RED",
+                            Name = "Lord of the Abyss"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Color = "ORANGE",
+                            Name = "Guardians of the Realm"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Color = "GREEN",
+                            Name = "Harbingers of the Forest"
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Field", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
 
                     b.Property<int>("X")
                         .HasColumnType("int");
@@ -288,59 +1364,476 @@ namespace Model.Migrations
                     b.ToTable("FIELDS");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Initiative", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.RuneDirection", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
+                    b.Property<string>("Direction")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("DIRECTION");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("INITIATIVES");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.RuneDirection", b =>
-                {
                     b.Property<int>("RuneId")
                         .HasColumnType("int")
                         .HasColumnName("RUNE_ID");
 
-                    b.Property<int>("DirectionId")
-                        .HasColumnType("int")
-                        .HasColumnName("DIRECTION_ID");
+                    b.HasKey("Id");
 
-                    b.HasKey("RuneId", "DirectionId");
-
-                    b.HasIndex("DirectionId");
+                    b.HasIndex("RuneId");
 
                     b.ToTable("RUNE_HAS_DIRECTIONS_JT");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 101,
+                            Direction = "NORTH_EAST",
+                            RuneId = 108
+                        },
+                        new
+                        {
+                            Id = 102,
+                            Direction = "EAST",
+                            RuneId = 108
+                        },
+                        new
+                        {
+                            Id = 103,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 108
+                        },
+                        new
+                        {
+                            Id = 104,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 108
+                        },
+                        new
+                        {
+                            Id = 105,
+                            Direction = "WEST",
+                            RuneId = 108
+                        },
+                        new
+                        {
+                            Id = 106,
+                            Direction = "NORTH_WEST",
+                            RuneId = 108
+                        },
+                        new
+                        {
+                            Id = 107,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 109
+                        },
+                        new
+                        {
+                            Id = 108,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 109
+                        },
+                        new
+                        {
+                            Id = 109,
+                            Direction = "NORTH_EAST",
+                            RuneId = 110
+                        },
+                        new
+                        {
+                            Id = 110,
+                            Direction = "EAST",
+                            RuneId = 110
+                        },
+                        new
+                        {
+                            Id = 111,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 110
+                        },
+                        new
+                        {
+                            Id = 112,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 110
+                        },
+                        new
+                        {
+                            Id = 113,
+                            Direction = "WEST",
+                            RuneId = 110
+                        },
+                        new
+                        {
+                            Id = 114,
+                            Direction = "NORTH_WEST",
+                            RuneId = 110
+                        },
+                        new
+                        {
+                            Id = 115,
+                            Direction = "EAST",
+                            RuneId = 111
+                        },
+                        new
+                        {
+                            Id = 116,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 111
+                        },
+                        new
+                        {
+                            Id = 117,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 111
+                        },
+                        new
+                        {
+                            Id = 201,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 209
+                        },
+                        new
+                        {
+                            Id = 202,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 209
+                        },
+                        new
+                        {
+                            Id = 203,
+                            Direction = "EAST",
+                            RuneId = 210
+                        },
+                        new
+                        {
+                            Id = 204,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 210
+                        },
+                        new
+                        {
+                            Id = 205,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 210
+                        },
+                        new
+                        {
+                            Id = 206,
+                            Direction = "NORTH_WEST",
+                            RuneId = 210
+                        },
+                        new
+                        {
+                            Id = 207,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 211
+                        },
+                        new
+                        {
+                            Id = 208,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 212
+                        },
+                        new
+                        {
+                            Id = 209,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 212
+                        },
+                        new
+                        {
+                            Id = 210,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 213
+                        },
+                        new
+                        {
+                            Id = 211,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 214
+                        },
+                        new
+                        {
+                            Id = 212,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 214
+                        },
+                        new
+                        {
+                            Id = 301,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 309
+                        },
+                        new
+                        {
+                            Id = 302,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 309
+                        },
+                        new
+                        {
+                            Id = 303,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 310
+                        },
+                        new
+                        {
+                            Id = 304,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 310
+                        },
+                        new
+                        {
+                            Id = 305,
+                            Direction = "WEST",
+                            RuneId = 310
+                        },
+                        new
+                        {
+                            Id = 306,
+                            Direction = "NORTH_EAST",
+                            RuneId = 311
+                        },
+                        new
+                        {
+                            Id = 307,
+                            Direction = "EAST",
+                            RuneId = 311
+                        },
+                        new
+                        {
+                            Id = 308,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 311
+                        },
+                        new
+                        {
+                            Id = 309,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 311
+                        },
+                        new
+                        {
+                            Id = 310,
+                            Direction = "WEST",
+                            RuneId = 311
+                        },
+                        new
+                        {
+                            Id = 311,
+                            Direction = "NORTH_WEST",
+                            RuneId = 311
+                        },
+                        new
+                        {
+                            Id = 312,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 312
+                        },
+                        new
+                        {
+                            Id = 313,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 312
+                        },
+                        new
+                        {
+                            Id = 314,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 313
+                        },
+                        new
+                        {
+                            Id = 401,
+                            Direction = "NORTH_EAST",
+                            RuneId = 409
+                        },
+                        new
+                        {
+                            Id = 402,
+                            Direction = "EAST",
+                            RuneId = 409
+                        },
+                        new
+                        {
+                            Id = 403,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 409
+                        },
+                        new
+                        {
+                            Id = 404,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 409
+                        },
+                        new
+                        {
+                            Id = 405,
+                            Direction = "WEST",
+                            RuneId = 409
+                        },
+                        new
+                        {
+                            Id = 406,
+                            Direction = "NORTH_WEST",
+                            RuneId = 409
+                        },
+                        new
+                        {
+                            Id = 407,
+                            Direction = "EAST",
+                            RuneId = 410
+                        },
+                        new
+                        {
+                            Id = 408,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 410
+                        },
+                        new
+                        {
+                            Id = 409,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 410
+                        },
+                        new
+                        {
+                            Id = 410,
+                            Direction = "NORTH_EAST",
+                            RuneId = 411
+                        },
+                        new
+                        {
+                            Id = 411,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 411
+                        },
+                        new
+                        {
+                            Id = 412,
+                            Direction = "NORTH_EAST",
+                            RuneId = 412
+                        },
+                        new
+                        {
+                            Id = 413,
+                            Direction = "EAST",
+                            RuneId = 412
+                        },
+                        new
+                        {
+                            Id = 414,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 412
+                        },
+                        new
+                        {
+                            Id = 415,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 412
+                        },
+                        new
+                        {
+                            Id = 416,
+                            Direction = "WEST",
+                            RuneId = 412
+                        },
+                        new
+                        {
+                            Id = 417,
+                            Direction = "NORTH_WEST",
+                            RuneId = 412
+                        },
+                        new
+                        {
+                            Id = 418,
+                            Direction = "NORTH_EAST",
+                            RuneId = 413
+                        },
+                        new
+                        {
+                            Id = 419,
+                            Direction = "EAST",
+                            RuneId = 413
+                        },
+                        new
+                        {
+                            Id = 420,
+                            Direction = "SOUTH_EAST",
+                            RuneId = 413
+                        },
+                        new
+                        {
+                            Id = 421,
+                            Direction = "SOUTH_WEST",
+                            RuneId = 413
+                        },
+                        new
+                        {
+                            Id = 422,
+                            Direction = "WEST",
+                            RuneId = 413
+                        },
+                        new
+                        {
+                            Id = 423,
+                            Direction = "NORTH_WEST",
+                            RuneId = 413
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.RuneFeature", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
+                    b.Property<string>("Feature")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("FEATURE");
+
                     b.Property<int>("RuneId")
                         .HasColumnType("int")
                         .HasColumnName("RUNE_ID");
 
-                    b.Property<int>("FeatureId")
-                        .HasColumnType("int")
-                        .HasColumnName("FEATURE_ID");
+                    b.HasKey("Id");
 
-                    b.HasKey("RuneId", "FeatureId");
-
-                    b.HasIndex("FeatureId");
+                    b.HasIndex("RuneId");
 
                     b.ToTable("RUNE_HAS_FEATURES_JT");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 101,
+                            Feature = "BOUNDLESS",
+                            RuneId = 112
+                        },
+                        new
+                        {
+                            Id = 201,
+                            Feature = "TOUGHNESS",
+                            RuneId = 212
+                        },
+                        new
+                        {
+                            Id = 301,
+                            Feature = "ROTATION",
+                            RuneId = 309
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Tile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
 
                     b.Property<int>("FactionId")
                         .HasColumnType("int")
@@ -365,6 +1858,14 @@ namespace Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("EndedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("ENDED_AT");
+
+                    b.Property<DateTime?>("StartedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("STARTED_AT");
+
                     b.HasKey("Id");
 
                     b.ToTable("GAMES");
@@ -376,9 +1877,10 @@ namespace Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("DirectionId")
-                        .HasColumnType("int")
-                        .HasColumnName("FACING");
+                    b.Property<string>("Direction")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("DIRECTION");
 
                     b.Property<int?>("FieldId")
                         .HasColumnType("int")
@@ -406,8 +1908,6 @@ namespace Model.Migrations
                         .HasColumnName("USER_ID");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DirectionId");
 
                     b.HasIndex("FieldId");
 
@@ -456,13 +1956,12 @@ namespace Model.Migrations
                         .HasColumnType("int")
                         .HasColumnName("POSITION_ID");
 
-                    b.Property<int>("DirectionId")
-                        .HasColumnType("int")
-                        .HasColumnName("FACING");
+                    b.Property<string>("Direction")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("DIRECTION");
 
                     b.HasKey("FieldId", "TileId", "PositionId");
-
-                    b.HasIndex("DirectionId");
 
                     b.HasIndex("PositionId");
 
@@ -485,6 +1984,10 @@ namespace Model.Migrations
                         .HasColumnType("int")
                         .HasColumnName("FACTION_ID");
 
+                    b.Property<bool>("StarredThisGame")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("STARRED_THIS_GAME");
+
                     b.HasKey("UserId", "GameId");
 
                     b.HasIndex("FactionId");
@@ -504,13 +2007,315 @@ namespace Model.Migrations
                         .HasColumnName("NAME");
 
                     b.ToTable("CHAMPIONS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 102,
+                            FactionId = 1,
+                            Quantity = 3,
+                            Name = "Pikeman"
+                        },
+                        new
+                        {
+                            Id = 103,
+                            FactionId = 1,
+                            Quantity = 4,
+                            Name = "Knight"
+                        },
+                        new
+                        {
+                            Id = 104,
+                            FactionId = 1,
+                            Quantity = 1,
+                            Name = "Dragon Rider"
+                        },
+                        new
+                        {
+                            Id = 105,
+                            FactionId = 1,
+                            Quantity = 2,
+                            Name = "Swordsman"
+                        },
+                        new
+                        {
+                            Id = 106,
+                            FactionId = 1,
+                            Quantity = 1,
+                            Name = "Landsknecht"
+                        },
+                        new
+                        {
+                            Id = 107,
+                            FactionId = 1,
+                            Quantity = 2,
+                            Name = "Arquebusier"
+                        },
+                        new
+                        {
+                            Id = 202,
+                            FactionId = 2,
+                            Quantity = 3,
+                            Name = "Mygalomorph"
+                        },
+                        new
+                        {
+                            Id = 203,
+                            FactionId = 2,
+                            Quantity = 3,
+                            Name = "Spike"
+                        },
+                        new
+                        {
+                            Id = 204,
+                            FactionId = 2,
+                            Quantity = 2,
+                            Name = "Chaos"
+                        },
+                        new
+                        {
+                            Id = 205,
+                            FactionId = 2,
+                            Quantity = 2,
+                            Name = "Horror"
+                        },
+                        new
+                        {
+                            Id = 206,
+                            FactionId = 2,
+                            Quantity = 1,
+                            Name = "Nightmare"
+                        },
+                        new
+                        {
+                            Id = 207,
+                            FactionId = 2,
+                            Quantity = 2,
+                            Name = "Wraith"
+                        },
+                        new
+                        {
+                            Id = 208,
+                            FactionId = 2,
+                            Quantity = 1,
+                            Name = "Demon"
+                        },
+                        new
+                        {
+                            Id = 302,
+                            FactionId = 3,
+                            Quantity = 3,
+                            Name = "Axeman"
+                        },
+                        new
+                        {
+                            Id = 303,
+                            FactionId = 3,
+                            Quantity = 3,
+                            Name = "Crossbowman"
+                        },
+                        new
+                        {
+                            Id = 304,
+                            FactionId = 3,
+                            Quantity = 2,
+                            Name = "Veteran"
+                        },
+                        new
+                        {
+                            Id = 305,
+                            FactionId = 3,
+                            Quantity = 2,
+                            Name = "Golem"
+                        },
+                        new
+                        {
+                            Id = 306,
+                            FactionId = 3,
+                            Quantity = 1,
+                            Name = "Combat Platform"
+                        },
+                        new
+                        {
+                            Id = 307,
+                            FactionId = 3,
+                            Quantity = 1,
+                            Name = "Pupil"
+                        },
+                        new
+                        {
+                            Id = 308,
+                            FactionId = 3,
+                            Quantity = 1,
+                            Name = "Wyvern"
+                        },
+                        new
+                        {
+                            Id = 402,
+                            FactionId = 4,
+                            Quantity = 2,
+                            Name = "Morlock"
+                        },
+                        new
+                        {
+                            Id = 403,
+                            FactionId = 4,
+                            Quantity = 4,
+                            Name = "Spark"
+                        },
+                        new
+                        {
+                            Id = 404,
+                            FactionId = 4,
+                            Quantity = 2,
+                            Name = "Hunter"
+                        },
+                        new
+                        {
+                            Id = 405,
+                            FactionId = 4,
+                            Quantity = 1,
+                            Name = "Sorcerer"
+                        },
+                        new
+                        {
+                            Id = 406,
+                            FactionId = 4,
+                            Quantity = 2,
+                            Name = "Herne"
+                        },
+                        new
+                        {
+                            Id = 407,
+                            FactionId = 4,
+                            Quantity = 3,
+                            Name = "Assassin"
+                        },
+                        new
+                        {
+                            Id = 408,
+                            FactionId = 4,
+                            Quantity = 1,
+                            Name = "Wyrm"
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Order", b =>
                 {
                     b.HasBaseType("Model.Entities.MonolithArena.GameContent.Tile");
 
+                    b.Property<string>("OrderType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.ToTable("ORDERS_BT");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 113,
+                            FactionId = 1,
+                            Quantity = 7,
+                            OrderType = "BATTLE_OR_CHARGE"
+                        },
+                        new
+                        {
+                            Id = 114,
+                            FactionId = 1,
+                            Quantity = 4,
+                            OrderType = "MOVE"
+                        },
+                        new
+                        {
+                            Id = 115,
+                            FactionId = 1,
+                            Quantity = 1,
+                            OrderType = "NET"
+                        },
+                        new
+                        {
+                            Id = 215,
+                            FactionId = 2,
+                            Quantity = 6,
+                            OrderType = "BATTLE"
+                        },
+                        new
+                        {
+                            Id = 216,
+                            FactionId = 2,
+                            Quantity = 2,
+                            OrderType = "MOVE"
+                        },
+                        new
+                        {
+                            Id = 217,
+                            FactionId = 2,
+                            Quantity = 2,
+                            OrderType = "PUSH"
+                        },
+                        new
+                        {
+                            Id = 314,
+                            FactionId = 3,
+                            Quantity = 5,
+                            OrderType = "BATTLE"
+                        },
+                        new
+                        {
+                            Id = 315,
+                            FactionId = 3,
+                            Quantity = 3,
+                            OrderType = "PUSH"
+                        },
+                        new
+                        {
+                            Id = 316,
+                            FactionId = 3,
+                            Quantity = 2,
+                            OrderType = "FIRE_CONCOCTION"
+                        },
+                        new
+                        {
+                            Id = 317,
+                            FactionId = 3,
+                            Quantity = 1,
+                            OrderType = "ENTRENCHMENT"
+                        },
+                        new
+                        {
+                            Id = 318,
+                            FactionId = 3,
+                            Quantity = 2,
+                            OrderType = "ROTATION"
+                        },
+                        new
+                        {
+                            Id = 319,
+                            FactionId = 3,
+                            Quantity = 1,
+                            OrderType = "FALSE_ORDER"
+                        },
+                        new
+                        {
+                            Id = 414,
+                            FactionId = 4,
+                            Quantity = 6,
+                            OrderType = "BATTLE"
+                        },
+                        new
+                        {
+                            Id = 415,
+                            FactionId = 4,
+                            Quantity = 4,
+                            OrderType = "MOVE"
+                        },
+                        new
+                        {
+                            Id = 416,
+                            FactionId = 4,
+                            Quantity = 1,
+                            OrderType = "PRECISE_SHOT"
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Rune", b =>
@@ -521,62 +2326,209 @@ namespace Model.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("SpecialFeatureId")
-                        .HasColumnType("int")
-                        .HasColumnName("SPECIAL_FEATURE_ID");
-
-                    b.HasIndex("SpecialFeatureId");
-
                     b.ToTable("RUNES");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 108,
+                            FactionId = 1,
+                            Quantity = 2,
+                            RuneType = "MINOR_ACCELERATION"
+                        },
+                        new
+                        {
+                            Id = 109,
+                            FactionId = 1,
+                            Quantity = 3,
+                            RuneType = "REGENERATION"
+                        },
+                        new
+                        {
+                            Id = 110,
+                            FactionId = 1,
+                            Quantity = 1,
+                            RuneType = "AGILITY"
+                        },
+                        new
+                        {
+                            Id = 111,
+                            FactionId = 1,
+                            Quantity = 2,
+                            RuneType = "STRENGTH"
+                        },
+                        new
+                        {
+                            Id = 112,
+                            FactionId = 1,
+                            Quantity = 1,
+                            RuneType = "CHARGE"
+                        },
+                        new
+                        {
+                            Id = 209,
+                            FactionId = 2,
+                            Quantity = 2,
+                            RuneType = "DISARMAMENT"
+                        },
+                        new
+                        {
+                            Id = 210,
+                            FactionId = 2,
+                            Quantity = 2,
+                            RuneType = "MINOR_ACCELERATION"
+                        },
+                        new
+                        {
+                            Id = 211,
+                            FactionId = 2,
+                            Quantity = 2,
+                            RuneType = "TELEPORTATION"
+                        },
+                        new
+                        {
+                            Id = 212,
+                            FactionId = 2,
+                            Quantity = 2,
+                            RuneType = "STRENGTH"
+                        },
+                        new
+                        {
+                            Id = 213,
+                            FactionId = 2,
+                            Quantity = 1,
+                            RuneType = "REGENERATION"
+                        },
+                        new
+                        {
+                            Id = 214,
+                            FactionId = 2,
+                            Quantity = 1,
+                            RuneType = "DOUBLE_ATTACK"
+                        },
+                        new
+                        {
+                            Id = 309,
+                            FactionId = 3,
+                            Quantity = 1,
+                            RuneType = "AGILITY"
+                        },
+                        new
+                        {
+                            Id = 310,
+                            FactionId = 3,
+                            Quantity = 2,
+                            RuneType = "REINFORCEMENT"
+                        },
+                        new
+                        {
+                            Id = 311,
+                            FactionId = 3,
+                            Quantity = 1,
+                            RuneType = "DOUBLE_ATTACK"
+                        },
+                        new
+                        {
+                            Id = 312,
+                            FactionId = 3,
+                            Quantity = 2,
+                            RuneType = "REGENERATION"
+                        },
+                        new
+                        {
+                            Id = 313,
+                            FactionId = 3,
+                            Quantity = 1,
+                            RuneType = "PENETRATION"
+                        },
+                        new
+                        {
+                            Id = 409,
+                            FactionId = 4,
+                            Quantity = 3,
+                            RuneType = "MINOR_ACCELERATION"
+                        },
+                        new
+                        {
+                            Id = 410,
+                            FactionId = 4,
+                            Quantity = 1,
+                            RuneType = "GREATER_ACCELERATION"
+                        },
+                        new
+                        {
+                            Id = 411,
+                            FactionId = 4,
+                            Quantity = 2,
+                            RuneType = "REGENERATION"
+                        },
+                        new
+                        {
+                            Id = 412,
+                            FactionId = 4,
+                            Quantity = 1,
+                            RuneType = "ACCURACY"
+                        },
+                        new
+                        {
+                            Id = 413,
+                            FactionId = 4,
+                            Quantity = 1,
+                            RuneType = "DOUBLE_ATTACK"
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Banner", b =>
                 {
                     b.HasBaseType("Model.Entities.MonolithArena.GameContent.Champion");
 
-                    b.Property<int>("SpecialFeatureId")
-                        .HasColumnType("int")
-                        .HasColumnName("SPECIAL_FEATURE_ID");
+                    b.Property<string>("BannerType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.HasIndex("SpecialFeatureId");
+                    b.Property<int>("Health")
+                        .HasColumnType("int")
+                        .HasColumnName("HEALTH");
 
                     b.ToTable("BANNERS");
-                });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Command", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.GameContent.Order");
-
-                    b.Property<string>("OrderType")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.ToTable("ORDER_COMMANDS");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.LogicGate", b =>
-                {
-                    b.HasBaseType("Model.Entities.MonolithArena.GameContent.Order");
-
-                    b.Property<string>("LogicGateType")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("OptionOneOrderId")
-                        .HasColumnType("int")
-                        .HasColumnName("OPTION_ONE_ORDER_ID");
-
-                    b.Property<int>("OptionTwoOrderId")
-                        .HasColumnType("int")
-                        .HasColumnName("OPTION_TWO_ORDER_ID");
-
-                    b.HasIndex("OptionOneOrderId")
-                        .IsUnique();
-
-                    b.HasIndex("OptionTwoOrderId")
-                        .IsUnique();
-
-                    b.ToTable("ORDER_LOGIC_GATES");
+                    b.HasData(
+                        new
+                        {
+                            Id = 101,
+                            FactionId = 1,
+                            Quantity = 1,
+                            Name = "Banner",
+                            BannerType = "STRENGTH",
+                            Health = 20
+                        },
+                        new
+                        {
+                            Id = 201,
+                            FactionId = 2,
+                            Quantity = 1,
+                            Name = "Banner",
+                            BannerType = "VENOM",
+                            Health = 20
+                        },
+                        new
+                        {
+                            Id = 301,
+                            FactionId = 3,
+                            Quantity = 1,
+                            Name = "Banner",
+                            BannerType = "TOUGHNESS",
+                            Health = 20
+                        },
+                        new
+                        {
+                            Id = 401,
+                            FactionId = 4,
+                            Quantity = 1,
+                            Name = "Banner",
+                            BannerType = "MANEUVER",
+                            Health = 20
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Authentication.RoleClaim", b =>
@@ -609,31 +2561,26 @@ namespace Model.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionAttack", b =>
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.BannerDirection", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Attack", "Attack")
-                        .WithMany()
-                        .HasForeignKey("AttackId")
+                    b.HasOne("Model.Entities.MonolithArena.GameContent.Banner", "Banner")
+                        .WithMany("Directions")
+                        .HasForeignKey("BannerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Banner");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionAttack", b =>
+                {
                     b.HasOne("Model.Entities.MonolithArena.GameContent.Champion", "Champion")
                         .WithMany("Attacks")
                         .HasForeignKey("ChampionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Direction", "Direction")
-                        .WithMany()
-                        .HasForeignKey("DirectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Attack");
-
                     b.Navigation("Champion");
-
-                    b.Navigation("Direction");
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionFeature", b =>
@@ -644,15 +2591,7 @@ namespace Model.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Feature", "Feature")
-                        .WithMany()
-                        .HasForeignKey("FeatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Champion");
-
-                    b.Navigation("Feature");
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.ChampionInitiative", b =>
@@ -663,51 +2602,27 @@ namespace Model.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Initiative", "Initiative")
-                        .WithMany()
-                        .HasForeignKey("InitiativeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Champion");
-
-                    b.Navigation("Initiative");
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.RuneDirection", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Direction", "Direction")
-                        .WithMany()
-                        .HasForeignKey("DirectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Model.Entities.MonolithArena.GameContent.Rune", "Rune")
                         .WithMany("Directions")
                         .HasForeignKey("RuneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Direction");
-
                     b.Navigation("Rune");
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.RuneFeature", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Feature", "Feature")
-                        .WithMany()
-                        .HasForeignKey("FeatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Model.Entities.MonolithArena.GameContent.Rune", "Rune")
                         .WithMany("Features")
                         .HasForeignKey("RuneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Feature");
 
                     b.Navigation("Rune");
                 });
@@ -725,10 +2640,6 @@ namespace Model.Migrations
 
             modelBuilder.Entity("Model.Entities.MonolithArena.InGame.GameLog", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Direction", "Direction")
-                        .WithMany()
-                        .HasForeignKey("DirectionId");
-
                     b.HasOne("Model.Entities.MonolithArena.GameContent.Field", "Field")
                         .WithMany()
                         .HasForeignKey("FieldId");
@@ -755,8 +2666,6 @@ namespace Model.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Direction");
-
                     b.Navigation("Field");
 
                     b.Navigation("Game");
@@ -781,12 +2690,6 @@ namespace Model.Migrations
 
             modelBuilder.Entity("Model.Entities.MonolithArena.InGame.TileField", b =>
                 {
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Direction", "Direction")
-                        .WithMany()
-                        .HasForeignKey("DirectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Model.Entities.MonolithArena.GameContent.Field", "Field")
                         .WithMany()
                         .HasForeignKey("FieldId")
@@ -804,8 +2707,6 @@ namespace Model.Migrations
                         .HasForeignKey("TileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Direction");
 
                     b.Navigation("Field");
 
@@ -866,14 +2767,6 @@ namespace Model.Migrations
                         .HasForeignKey("Model.Entities.MonolithArena.GameContent.Rune", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Feature", "SpecialFeature")
-                        .WithMany()
-                        .HasForeignKey("SpecialFeatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SpecialFeature");
                 });
 
             modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Banner", b =>
@@ -883,48 +2776,6 @@ namespace Model.Migrations
                         .HasForeignKey("Model.Entities.MonolithArena.GameContent.Banner", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Feature", "SpecialFeature")
-                        .WithMany()
-                        .HasForeignKey("SpecialFeatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SpecialFeature");
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Command", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Order", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.Command", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.LogicGate", b =>
-                {
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Order", null)
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.LogicGate", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Order", "OptionOneOrder")
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.LogicGate", "OptionOneOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Model.Entities.MonolithArena.GameContent.Order", "OptionTwoOrder")
-                        .WithOne()
-                        .HasForeignKey("Model.Entities.MonolithArena.GameContent.LogicGate", "OptionTwoOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("OptionOneOrder");
-
-                    b.Navigation("OptionTwoOrder");
                 });
 
             modelBuilder.Entity("Model.Entities.Authentication.Role", b =>
@@ -974,6 +2825,11 @@ namespace Model.Migrations
                     b.Navigation("Directions");
 
                     b.Navigation("Features");
+                });
+
+            modelBuilder.Entity("Model.Entities.MonolithArena.GameContent.Banner", b =>
+                {
+                    b.Navigation("Directions");
                 });
 #pragma warning restore 612, 618
         }

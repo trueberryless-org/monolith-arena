@@ -1,4 +1,5 @@
-﻿using Model.Entities.Authentication;
+﻿using System.Text.Json.Serialization;
+using Model.Entities.Authentication;
 using Model.Entities.MonolithArena.GameContent;
 
 namespace Model.Entities.MonolithArena.InGame;
@@ -12,9 +13,13 @@ public class UserGame
     
     [Column("GAME_ID")]
     public int GameId { get; set; }
+    [JsonIgnore]
     public Game Game { get; set; }
     
     [Column("FACTION_ID")]
     public int FactionId { get; set; }
     public Faction Faction { get; set; }
+    
+    [Column("STARRED_THIS_GAME")]
+    public bool StarredThisGame { get; set; }
 }
