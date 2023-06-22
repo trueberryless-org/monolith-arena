@@ -13,20 +13,10 @@
     {
         <MudText Typo="Typo.h5" Class="my-5">Recent Games</MudText>
         <MudContainer Class="pl-0 pr-0 d-flex align-self-center" Style="margin-bottom: 5vh">
-            <DataInit Data="games">
-                <ChildContent Context="games">
-                    @foreach (var game in games)
-                    {
-                        <MudPaper Href="" Class="paper-link" Elevation="5">
-                            <div>
-                                <MudText Typo="Typo.subtitle1">
-                                    @string.Join(" vs ", game.Users.Select(e => e.User.Username))
-                                </MudText>
-                            </div>
-                        </MudPaper>
-                    }
-                </ChildContent>
-            </DataInit>
+            @foreach (var game in games)
+            {
+                <GameCard GameId="game.Id"></GameCard>
+            }
         </MudContainer>
     }
 
@@ -76,14 +66,14 @@
 
 @code {
 
-    private List<GameListDto> games = new List<GameListDto>();
+    private List<Game> games = new List<Game>();
 
     protected override async Task OnInitializedAsync()
     {
         //Console.WriteLine(NavigationManager.BaseUri);
         //Console.WriteLine(await Http.GetAsync("api/games"));
         // games = await Http.GetFromJsonAsync<List<GameListDto>>("api/games");
-        games = (await GameRepository.ReadAsync()).Select(e => e.Adapt<GameListDto>()).ToList();
+        games = (await GameRepository.ReadAsync()).ToList();
 
         await GameRepository.DeleteAsync(e => e.StartedAt < DateTime.Now.AddMonths(-2) && ! e.Users.Any(f => f.StarredThisGame));
     }

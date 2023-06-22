@@ -1,0 +1,185 @@
+﻿@using WebApi.Dtos
+@using Mapster
+@using Model.Entities.MonolithArena.InGame
+@inject IGameRepository GameRepository
+
+<DataInit Data="Game">
+    <ChildContent Context="game">
+        <MudPaper @onclick="() => GoToGame(game.Id)" Class="game-card" Elevation="5" data-tilt>
+            <div>
+                @foreach (var userGame in game.Users)
+                {
+                    <div class="player @userGame.Faction.Color">
+                        <div class="username">@userGame.User.Username</div>
+                        <div class="factionname">@userGame.Faction.Name</div>
+                    </div>
+
+                    @if (userGame != game.Users.Last())
+                    {
+                        <div class="vs">VS</div>
+                    }
+                }
+            </div>
+            <div class="game-card-background">
+                @if (game.Users.Count == 1)
+                {
+                    <div class="@game.Users[0].Faction.Color"></div>
+                }
+                @if (game.Users.Count == 2)
+                {
+                    <div class="top-left @game.Users[0].Faction.Color"></div>
+                    <div class="bottom-right @game.Users[1].Faction.Color"></div>
+                }
+                @if (game.Users.Count == 3)
+                {
+                    <div class="top-left @game.Users[0].Faction.Color"></div>
+                    <div class="top-right @game.Users[1].Faction.Color"></div>
+                    <div class="bottom-right @game.Users[2].Faction.Color"></div>
+                }
+                @if (game.Users.Count == 4)
+                {
+                    <div class="top-left @game.Users[0].Faction.Color"></div>
+                    <div class="top-right @game.Users[1].Faction.Color"></div>
+                    <div class="bottom-left @game.Users[2].Faction.Color"></div>
+                    <div class="bottom-right @game.Users[3].Faction.Color"></div>
+                }
+            </div>
+        </MudPaper>
+    </ChildContent>
+</DataInit>
+
+@code {
+
+    [Parameter]
+    public int GameId { get; set; }
+
+    public Game Game { get; set; }
+    private List<string> colors { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Game = (await GameRepository.ReadAsync(GameId));
+        colors = Game.Users.Select(e => e.Faction.Color.ToString()).ToList();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("initializeVanillaTilt");
+    }
+
+    private void GoToGame(int gameId)
+    {
+        NavigationManager.NavigateTo($"/games/{gameId}");
+    }
+
+}
+
+<style>    
+    .game-card {
+        position: relative;
+        transition: transform .3s ease-in-out;
+        width: 200px;
+        min-height: 200px;
+        border-radius: 20px;
+        margin: 10px;
+        cursor: pointer;
+        
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+        overflow: hidden;
+    }
+
+    .game-card .player {
+        margin: 10px 0 10px 0;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .game-card .username {
+        font-size: 1rem;
+    }
+
+    .game-card .factionname {
+        text-transform: uppercase;
+        color: @ThemeHandler.Theme.Palette.GrayDefault;
+        font-size: .7rem;
+    }
+    
+    .game-card .vs {
+        margin: 10px 0 10px 0;
+        color: @ThemeHandler.Theme.Palette.GrayDark;
+    }
+    
+    .game-card .player.BLUE .factionname { 
+        color: #018bca;
+    }
+        
+    .game-card .player.RED .factionname { 
+        color: #dc2912;
+    }
+    
+    .game-card .player.ORANGE .factionname { 
+        color: #e87910;
+    }
+    
+    .game-card .player.GREEN .factionname { 
+        color: #09986d;
+    }
+    
+    .game-card .player.YELLOW .factionname { 
+        color: #b0a203;
+    }
+    
+    .game-card .player.PURPLE .factionname { 
+        color: #a11b77;
+    }
+    
+    .game-card-background div {
+        position: absolute;
+        z-index: 1;
+        inset: -30% -30% -30% -30%;
+    }
+    
+    .game-card-background .top-left {
+        inset: -100% 0 0 -100%;
+    }
+    
+    .game-card-background .top-right {
+        inset: -100% -100% 0 0;
+    }
+    
+    .game-card-background .bottom-left {
+        inset: 0 0 -100% -100%;
+    }
+    
+    .game-card-background .bottom-right {
+        inset: 0 -100% -100% 0;
+    }
+    
+    .game-card-background .BLUE {
+        background: radial-gradient(circle, rgba(1,139,202, 0.6) 0%, rgba(1,139,202, 0) 50%);        
+    }
+    
+    .game-card-background .RED {
+        background: radial-gradient(circle, rgba(220,41,18, 0.6) 0%, rgba(220,41,18, 0) 50%);        
+    }
+    
+    .game-card-background .ORANGE {
+        background: radial-gradient(circle, rgba(232,121,16, 0.6) 0%, rgba(232,121,16, 0) 50%);
+    }
+    
+    .game-card-background .GREEN {
+        background: radial-gradient(circle, rgba(9,152,109, 0.6) 0%, rgba(9,152,109, 0) 50%);        
+    }
+    
+    .game-card-background .YELLOW {
+        background: radial-gradient(circle, rgba(176,162,3, 0.6) 0%, rgba(176,162,3, 0) 50%);        
+    }
+    
+    .game-card-background .PURPLE {
+        background: radial-gradient(circle, rgba(161,27,119, 0.6) 0%, rgba(161,27,119, 0) 50%);        
+    }
+</style>

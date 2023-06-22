@@ -32,6 +32,16 @@
 
 <script src="_content/MudBlazor/MudBlazor.min.js"></script>
 <script src="_framework/blazor.server.js"></script>
+<script type="text/javascript" src="js/vanilla-tilt.js"></script>
+
+<script>
+    window.initializeVanillaTilt = function() {
+        VanillaTilt.init(document.querySelectorAll(".game-card"), {
+            max: 12,
+            speed: 200
+        });
+    };
+</script>
 
 </body>
 </html>

@@ -6,5 +6,6 @@ public enum FactionColor
     RED,
     ORANGE,
     GREEN,
-    YELLOW
+    YELLOW,
+    PURPLE
 }
