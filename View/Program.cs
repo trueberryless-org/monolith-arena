@@ -52,6 +52,7 @@ builder.Services.AddScoped(sp =>
     return httpClient;
 });
 builder.Services.AddScoped<IGameRepository, GameRepository>();
+builder.Services.AddScoped<IFieldRepository, FieldRepository>();
 
 builder.Services.AddScoped<ILogEntryRepository, LogEntryRepository>();
 builder.Services.AddScoped<IRoleClaimRepository, RoleClaimRepository>();

@@ -1,7 +1,27 @@
 ﻿@page "/games/{GameId:int}"
-<h3>Games</h3>
+@using Position = Model.Entities.MonolithArena.InGame.Position
+@using Model.Entities.MonolithArena.InGame
+@inject IGameRepository GameRepository
+
+<DataInit Data="CurrentPosition">
+    <ChildContent Context="position">
+        <Board Position="position"></Board>
+    </ChildContent>
+</DataInit>
 
 @code {
+
     [Parameter]
     public int GameId { get; set; }
+
+    public Game Game { get; set; }
+
+    public Position CurrentPosition { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Game = await GameRepository.ReadAsync(GameId);
+        CurrentPosition = Game.Positions.FirstOrDefault(e => e.Order <= Game.Positions.Min(f => f.Order));
+    }
+
 }
